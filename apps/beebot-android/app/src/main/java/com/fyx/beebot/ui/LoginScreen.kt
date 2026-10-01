@@ -29,8 +29,8 @@ import com.fyx.beebot.ui.theme.Hud
 
 /** 登录鉴权常量。 */
 private object LegacyAuth {
-    const val ACCOUNT = "FYX"
-    const val PASSWORD = "680221"
+    val ACCOUNT: String get() = com.fyx.beebot.BuildConfig.LOCAL_LOGIN_ACCOUNT
+    val PASSWORD: String get() = com.fyx.beebot.BuildConfig.LOCAL_LOGIN_PASSWORD
 
     const val PREFS = "beebot_prefs"
     const val KEY_ACCOUNT = "login_account"
@@ -38,7 +38,8 @@ private object LegacyAuth {
     const val KEY_AUTO = "auto_login"
 
     fun validate(account: String, password: String): Boolean =
-        account.trim() == ACCOUNT && password == PASSWORD
+        ACCOUNT.isNotBlank() && PASSWORD.isNotBlank() &&
+            account.trim() == ACCOUNT && password == PASSWORD
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

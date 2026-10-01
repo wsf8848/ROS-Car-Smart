@@ -40,15 +40,16 @@ import androidx.compose.ui.unit.sp
 import com.fyx.beebot.ui.theme.Hud
 
 object Auth {
-    const val ACCOUNT = "FYX"
-    const val PASSWORD = "wsf680221"
+    val ACCOUNT: String get() = com.fyx.beebot.BuildConfig.LOCAL_LOGIN_ACCOUNT
+    val PASSWORD: String get() = com.fyx.beebot.BuildConfig.LOCAL_LOGIN_PASSWORD
     const val PREFS = "beebot_prefs"
     const val KEY_ACCOUNT = "login_account"
     const val KEY_PASSWORD = "login_password"
     const val KEY_AUTO = "auto_login"
 
     fun validate(account: String, password: String): Boolean =
-        account.trim() == ACCOUNT && password == PASSWORD
+        ACCOUNT.isNotBlank() && PASSWORD.isNotBlank() &&
+            account.trim() == ACCOUNT && password == PASSWORD
 }
 
 @Composable

@@ -94,6 +94,8 @@ android {
         buildConfigField("String", "EZVIZ_DEVICE_SERIAL", buildEzvizConfigString("EZVIZ_DEVICE_SERIAL"))
         buildConfigField("String", "EZVIZ_CHANNEL_NO", buildEzvizConfigString("EZVIZ_CHANNEL_NO", "1"))
         buildConfigField("String", "EZVIZ_VERIFY_CODE", buildEzvizConfigString("EZVIZ_VERIFY_CODE"))
+        buildConfigField("String", "LOCAL_LOGIN_ACCOUNT", buildConfigString("LOCAL_LOGIN_ACCOUNT", ""))
+        buildConfigField("String", "LOCAL_LOGIN_PASSWORD", buildConfigString("LOCAL_LOGIN_PASSWORD", ""))
     }
 
     signingConfigs {

@@ -1,4 +1,4 @@
-# ROS-Car-Smart
+# RDK X5 ROS 自主导航车平台
 
 > 面向四驱远程车的多端开源工程集合：STM32 底盘固件、ESP32-C3 网关、Android 掌机控制 APP、Wi‑Fi 摄像头模块，以及 RDK X5 ROS 自主导航控制台。
 
@@ -83,5 +83,17 @@ ROS：   ros/bee-ros-web-console/（ROS 2 Humble / Python / 前端静态资源�
 |---|---|---|
 | v1.0.0 | 2026-10-01 | 首次统一归档 STM32、ESP32-C3、Android、Wi‑Fi 摄像头和 RDK X5 ROS 源码 |
 
-<sub>ROS-Car-Smart · 广州突击者远程车控制系统</sub>
+<sub>RDK X5 ROS 自主导航车平台 · STM32 + ESP32-C3 + Android + ROS 2</sub>
 
+## 面试导览
+
+| 维度 | 可验证内容 |
+|---|---|
+| 项目定位 | RDK X5、ROS 2 与 STM32 四驱底盘组成的自主导航车完整平台 |
+| 我的工作 | 统一底盘固件、无线网关、掌机 APP、LD14 雷达、Web Console 和 Nav2 工具链 |
+| 技术难点 | UART5 底盘协议、里程计/IMU、地图生命周期、Nav2、仿真替身与网页实时控制 |
+| 工程价值 | 展示嵌入式、Android、Linux/ROS、Web 与系统交付的跨栈集成能力 |
+
+### 本地敏感配置
+
+Android 本地登录参数使用外部 MQTT 环境文件中的 `LOCAL_LOGIN_ACCOUNT` 与 `LOCAL_LOGIN_PASSWORD` 注入；缺少配置时登录安全失败。真实 MQTT、萤石、签名和登录凭据均不得提交。
