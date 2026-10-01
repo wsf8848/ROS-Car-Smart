@@ -1,0 +1,37 @@
+LD-14 USART1 接收与 USART2 调试输出实机证据
+日期：2026-07-26
+
+硬件与接口：
+- MCU：STM32F103RCT6
+- LD-14：USART1_RX=PA10，USART1_TX=PA9，230400-8-N-1
+- 调试口：USART2_TX=PA2，USART2_RX=PA3，115200-8-N-1
+- 调试串口：COM85（JLink CDC UART Port）
+
+最终下载：
+- J-Link S/N：771741787
+- 目标电压：3.300 V
+- 目标器件：STM32F103RC
+- 接口：SWD，4000 kHz
+- 下载结果：Flash 内容与当前 Project.hex 一致，复位后正常运行
+
+下载后 5 秒串口抓取统计：
+- 接收字节：47697
+- LD14 RAW 标签：48
+- LD14 STAT 标签：48
+- 有效帧计数：6566 -> 8223
+- CRC 错误最大值：0
+
+代表性原始帧（固定 47 字节）：
+54 2C 71 08 4E 2E 77 00 E0 77 00 DE 76 00 DE 75
+00 DE 75 00 DE 00 00 DC 00 00 DA 00 00 DA 00 00
+DE 00 00 CC 00 00 DE 00 00 DE 9C 30 7E 34 33
+
+代表性解析结果：
+[LD14] speed=2161 deg/s rpm=360.16 start=118.54 end=124.44 ts=13438 crc=33
+P00 angle=118.54 deg distance=119 mm confidence=224
+P01 angle=119.07 deg distance=119 mm confidence=222
+P02 angle=119.61 deg distance=118 mm confidence=222
+P11 angle=124.44 deg distance=0 mm confidence=222
+[LD14 STAT] valid=6566 crc_error=0
+
+结论：USART1 已持续接收并通过 CRC8 校验 LD-14 原始数据；主循环能够解析帧级字段和十二个测量点，并通过 USART2 限速打印原始帧、解析结果与统计信息。

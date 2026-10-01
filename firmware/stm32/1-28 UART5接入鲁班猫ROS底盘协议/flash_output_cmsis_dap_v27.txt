@@ -1,0 +1,3 @@
+Load "C:\\Users\\Bee\\Desktop\\远程车控制系统\\1-1 车辆开发工程源码(STM32)\\1-13 UART4接入ESP32C3遥测\\Objects\\Project.axf" 
+Erase Done.Programming Done.Verify OK.Application running ...
+Flash Load finished at 21:17:59

@@ -1,0 +1,18 @@
+[Unit]
+Description=Bee Nav2 simulation stack (manual test only)
+After=bee-nav2-map.service
+Requires=bee-nav2-map.service
+
+[Service]
+Type=simple
+User=sunrise
+Group=sunrise
+Environment=ROS_DOMAIN_ID=0
+ExecStart=/opt/bee-ros-web-console/deploy/start-nav2-stack.sh
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=15
+KillMode=control-group
+
+[Install]
+WantedBy=multi-user.target

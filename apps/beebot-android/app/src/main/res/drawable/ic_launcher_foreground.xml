@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 外六边形（科技感荧光框） -->
+    <path android:strokeColor="#FF22D3EE" android:strokeWidth="2.5" android:fillColor="#1122D3EE"
+        android:pathData="M54,20 L83.4,37 L83.4,71 L54,88 L24.6,71 L24.6,37 Z" />
+    <path android:strokeColor="#5522D3EE" android:strokeWidth="1" android:fillColor="#00000000"
+        android:pathData="M54,26 L78.2,40 L78.2,68 L54,82 L29.8,68 L29.8,40 Z" />
+
+    <!-- 翅膀（半透明青） -->
+    <path android:fillColor="#3322D3EE"
+        android:pathData="M33,50 a9,12 0 1,0 18,0 a9,12 0 1,0 -18,0 Z" />
+    <path android:fillColor="#3322D3EE"
+        android:pathData="M57,50 a9,12 0 1,0 18,0 a9,12 0 1,0 -18,0 Z" />
+
+    <!-- 蜂身 + 条纹（裁剪在身体内） -->
+    <group>
+        <clip-path android:pathData="M42,58 a12,17 0 1,0 24,0 a12,17 0 1,0 -24,0 Z" />
+        <path android:fillColor="#FFFBBF24"
+            android:pathData="M42,58 a12,17 0 1,0 24,0 a12,17 0 1,0 -24,0 Z" />
+        <path android:fillColor="#FF0A0E14" android:pathData="M40,50 H68 V55 H40 Z" />
+        <path android:fillColor="#FF0A0E14" android:pathData="M40,60 H68 V65 H40 Z" />
+        <path android:fillColor="#FF0A0E14" android:pathData="M40,70 H68 V75 H40 Z" />
+    </group>
+    <path android:strokeColor="#FFB77E11" android:strokeWidth="1.5" android:fillColor="#00000000"
+        android:pathData="M42,58 a12,17 0 1,0 24,0 a12,17 0 1,0 -24,0 Z" />
+
+    <!-- 机器人头部 -->
+    <path android:fillColor="#FF121A26" android:strokeColor="#FF22D3EE" android:strokeWidth="1.5"
+        android:pathData="M45,37 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 Z" />
+    <!-- 传感器眼 -->
+    <path android:fillColor="#FF22D3EE" android:pathData="M48.5,37 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0 Z" />
+    <path android:fillColor="#FF22D3EE" android:pathData="M55.5,37 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0 Z" />
+
+    <!-- 天线 -->
+    <path android:strokeColor="#FF22D3EE" android:strokeWidth="2" android:fillColor="#00000000"
+        android:pathData="M49,30 L45,22" />
+    <path android:strokeColor="#FF22D3EE" android:strokeWidth="2" android:fillColor="#00000000"
+        android:pathData="M59,30 L63,22" />
+    <path android:fillColor="#FF34D399" android:pathData="M43,20 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0 Z" />
+    <path android:fillColor="#FF34D399" android:pathData="M60,20 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0 Z" />
+</vector>

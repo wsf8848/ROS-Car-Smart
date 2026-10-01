@@ -1,0 +1,14 @@
+[Unit]
+Description=Bee ROS Web Console Test OccupancyGrid
+After=bee-web-console.service
+
+[Service]
+Type=simple
+User=sunrise
+Group=sunrise
+Environment=ROS_DOMAIN_ID=0
+ExecStart=/opt/bee-ros-web-console/deploy/start-test-map.sh
+Restart=on-failure
+RestartSec=2
+
+# This service is intentionally not enabled. Stop it before a real SLAM /map publisher is started.

@@ -1,0 +1,18 @@
+frames:
+  map_to_odom:
+    type: dynamic
+    source: slam_toolbox_or_amcl
+  odom_to_base_link:
+    type: dynamic
+    source: robot_localization
+  base_link_to_laser:
+    type: static
+    status: pending_physical_measurement
+    translation_m: [null, null, null]
+    rotation_rpy_rad: [null, null, null]
+  base_link_to_imu_link:
+    type: static
+    status: pending_physical_measurement
+    translation_m: [null, null, null]
+    rotation_rpy_rad: [null, null, null]
+

@@ -1,0 +1,14 @@
+#ifndef __MY_USART2_H
+#define __MY_USART2_H
+
+#include <stdio.h>
+#include "stm32f10x.h"                  // Device header
+
+void My_USART2_Init(void);
+void My_USART2_SendByte(uint8_t Byte);
+void My_USART2_SendArray(uint8_t *Array, uint16_t Length);
+void My_USART2_SendString(char *String);
+void My_USART2_SendNumber(uint32_t Number, uint8_t Length);
+void My_USART2_Printf(char *format, ...);
+
+#endif

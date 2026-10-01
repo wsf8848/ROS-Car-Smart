@@ -1,0 +1,26 @@
+[Unit]
+Description=Bee Nav2 task executor (manual simulation only)
+After=bee-nav2-stack.service
+Requires=bee-nav2-stack.service
+
+[Service]
+Type=simple
+User=sunrise
+Group=sunrise
+Environment=ROS_DOMAIN_ID=0
+Environment=BEE_EXECUTOR_ALLOW_MOTION=1
+Environment=BEE_TASK_COMMAND_FILE=/run/bee-nav-task-sim/command.json
+Environment=BEE_TASK_STATUS_FILE=/run/bee-nav-task-sim/status.json
+Environment=BEE_PHYSICAL_VERIFICATION_FILE=/run/bee-nav-task-sim/sim-verified
+Environment=BEE_TASK_EXECUTOR_NODE=bee_nav_task_executor_sim
+RuntimeDirectory=bee-nav-task-sim
+ExecStartPre=/usr/bin/touch /run/bee-nav-task-sim/sim-verified
+ExecStart=/opt/bee-ros-web-console/deploy/start-nav-task-executor.sh
+ExecStopPost=/usr/bin/rm -f /run/bee-nav-task-sim/sim-verified /run/bee-nav-task-sim/command.json
+Restart=on-failure
+RestartSec=2
+KillMode=control-group
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target

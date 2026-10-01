@@ -1,0 +1,18 @@
+[Unit]
+Description=Bee UART5 ROS2 base driver
+After=dev-ttyS5.device
+ConditionPathExists=/dev/ttyS5
+
+[Service]
+Type=simple
+User=sunrise
+Group=sunrise
+SupplementaryGroups=dialout
+Environment=ROS_DOMAIN_ID=0
+ExecStart=/opt/bee-ros-web-console/deploy/start-base-driver.sh
+Restart=always
+RestartSec=1
+TimeoutStopSec=8
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Bee Nav2 simulated robot (manual test only)
+After=bee-web-console.service
+[Service]
+Type=simple
+User=sunrise
+Group=sunrise
+Environment=ROS_DOMAIN_ID=0
+ExecStart=/opt/bee-ros-web-console/deploy/start-nav2-sim.sh
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=10
+[Install]
+WantedBy=multi-user.target

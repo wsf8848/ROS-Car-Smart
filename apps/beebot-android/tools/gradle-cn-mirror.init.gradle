@@ -1,0 +1,16 @@
+/*
+ * 本机首次恢复 Android 构建环境时使用的 Gradle 仓库镜像。
+ * 仅通过 --init-script 显式启用，不改变工程正式仓库配置。
+ */
+settingsEvaluated { settings ->
+    settings.pluginManagement.repositories.clear()
+    settings.pluginManagement.repositories.maven { url = uri('https://maven.aliyun.com/repository/google') }
+    settings.pluginManagement.repositories.maven { url = uri('https://maven.aliyun.com/repository/public') }
+    settings.pluginManagement.repositories.mavenCentral()
+    settings.pluginManagement.repositories.gradlePluginPortal()
+
+    settings.dependencyResolutionManagement.repositories.clear()
+    settings.dependencyResolutionManagement.repositories.maven { url = uri('https://maven.aliyun.com/repository/google') }
+    settings.dependencyResolutionManagement.repositories.maven { url = uri('https://maven.aliyun.com/repository/public') }
+    settings.dependencyResolutionManagement.repositories.mavenCentral()
+}

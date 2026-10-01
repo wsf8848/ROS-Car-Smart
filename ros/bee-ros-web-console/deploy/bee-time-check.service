@@ -1,0 +1,7 @@
+[Unit]
+Description=Bee RDK Runtime Time Health Check
+After=bee-time-guard.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/bee-ros-web-console/tools/bee_time_guard.py

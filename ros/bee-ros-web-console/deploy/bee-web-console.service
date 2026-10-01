@@ -1,0 +1,38 @@
+[Unit]
+Description=Bee ROS Web Console Gateway
+After=network.target bee-time-guard.service bee-ld14.service
+Wants=bee-time-guard.service bee-ld14.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=sunrise
+Group=sunrise
+Environment=ROS_DOMAIN_ID=0
+Environment=BEE_WEB_ROOT=/opt/bee-ros-web-console/frontend
+Environment=BEE_HTTP_PORT=8080
+Environment=BEE_WS_PORT=8765
+Environment=BEE_BAGS_ROOT=/opt/bee-ros-web-console/data/rosbags
+Environment=BEE_MAPS_ROOT=/opt/bee-ros-web-console/data/maps
+Environment=BEE_PATROLS_ROOT=/opt/bee-ros-web-console/data/patrol_tasks
+Environment=BEE_TIME_GUARD_STATUS=/run/bee-time-guard/status.json
+Environment=BEE_CAMERA_DEVICE=/dev/v4l/by-id/usb-Generic_Integrated_Webcam_200901010001-video-index0
+Environment=BEE_CAMERA_OUTPUT_WIDTH=960
+Environment=BEE_CAMERA_OUTPUT_HEIGHT=540
+Environment=BEE_CAMERA_OUTPUT_FPS=15
+Environment=BEE_POWER_DRY_RUN=0
+Environment=BEE_MOTION_ENABLE=0
+Environment=BEE_TASK_COMMAND_FILE=/run/bee-nav-task/command.json
+Environment=BEE_TASK_STATUS_FILE=/run/bee-nav-task/status.json
+Environment=BEE_PHYSICAL_VERIFICATION_FILE=/etc/bee-ros-web-console/physical-chassis-verified
+Environment=BEE_STM32_READINESS_REPORT=/opt/bee-ros-web-console/data/stm32-arrival-readiness.json
+EnvironmentFile=-/etc/bee-ros-web-console.env
+ExecStart=/opt/bee-ros-web-console/deploy/start-gateway.sh
+Restart=always
+RestartSec=2
+KillMode=control-group
+TimeoutStopSec=12
+SendSIGKILL=yes
+
+[Install]
+WantedBy=multi-user.target

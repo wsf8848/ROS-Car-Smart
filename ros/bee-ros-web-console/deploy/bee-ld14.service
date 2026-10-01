@@ -1,0 +1,17 @@
+[Unit]
+Description=Bee LD14 ROS2 Driver
+After=systemd-udev-settle.service
+Wants=systemd-udev-settle.service
+
+[Service]
+Type=simple
+User=sunrise
+Group=sunrise
+SupplementaryGroups=dialout
+Environment=ROS_DOMAIN_ID=0
+ExecStart=/opt/bee-ros-web-console/deploy/start-ld14.sh
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

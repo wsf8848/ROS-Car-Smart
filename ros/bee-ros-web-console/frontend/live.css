@@ -1,0 +1,207 @@
+#bee-console .live-radar-grid{position:absolute;inset:0;z-index:2;pointer-events:none}
+#bee-console .live-radar-ring{fill:none;stroke:#35515b;stroke-width:1;opacity:.55}
+#bee-console .live-radar-axis{stroke:#35515b;stroke-width:1;opacity:.35}
+#bee-console .live-radar-point{fill:#61ead8;opacity:.92}
+#bee-console .live-radar-origin{fill:#e9fbf8;stroke:#34d4c1;stroke-width:4}
+#bee-console .live-radar-heading{fill:#34d4c1}
+#bee-console .map:not(.radar-expanded) .live-radar-grid{inset:auto 14px 88px auto;width:250px;height:150px;z-index:5;border:1px solid #315361;border-radius:5px;background:rgba(10,18,24,.9);box-shadow:0 8px 24px rgba(0,0,0,.3);pointer-events:auto;cursor:crosshair}
+#bee-console .map.radar-expanded .live-radar-grid{inset:0;width:100%;height:100%;z-index:4;border:0;border-radius:0;background:#0c171e;box-shadow:none;pointer-events:auto;cursor:crosshair}
+#bee-console .live-radar-caption{display:none;position:absolute;right:14px;bottom:241px;z-index:6;padding:4px 7px;border:1px solid #315361;border-radius:4px;background:rgba(10,18,24,.94);color:#8fded5;font-size:9px}
+#bee-console .map:not(.radar-expanded) .live-radar-caption{display:block}
+#bee-console .map.radar-expanded .live-radar-caption{left:14px;right:auto;bottom:48px;font-size:10px}
+#bee-console .radar-minimize{position:absolute;left:14px;top:14px;z-index:30;display:none;align-items:center;gap:6px;height:32px;padding:0 10px;border:1px solid #3d606b;border-radius:5px;background:rgba(13,31,39,.95);color:#cde5e8;font-size:10px;font-weight:650;box-shadow:0 8px 22px rgba(0,0,0,.3);cursor:pointer}
+#bee-console .radar-minimize:hover{border-color:#59a59f;background:#16353b;color:#edffff}
+#bee-console .map.radar-expanded .radar-minimize{display:inline-flex}
+#bee-console .camera-view{position:absolute;inset:0;z-index:40;display:none;align-items:center;justify-content:center;overflow:hidden;background:#05090c}
+#bee-console .map.camera-expanded .camera-view{display:flex}
+#bee-console .map.camera-visible:not(.camera-expanded) .camera-view{display:flex;inset:auto 14px 14px auto;width:280px;height:176px;z-index:12;border:2px solid #3b817f;border-radius:6px;background:rgba(10,18,24,.98);box-shadow:0 10px 30px rgba(0,0,0,.58),0 0 0 2px rgba(52,212,193,.12);cursor:grab;touch-action:none}
+#bee-console .map.camera-visible:not(.camera-expanded) .camera-view.dragging{cursor:grabbing;user-select:none;box-shadow:0 14px 36px rgba(0,0,0,.68),0 0 0 2px rgba(52,212,193,.35)}
+#bee-console .map.camera-visible:not(.camera-expanded) .camera-frame{object-fit:cover}
+#bee-console .map.camera-visible:not(.camera-expanded) .camera-minimize{display:none}
+#bee-console .map.camera-visible:not(.camera-expanded) .camera-status{right:7px;top:7px;padding:4px 6px;font-size:9px}
+#bee-console .map.camera-visible:not(.camera-expanded) .camera-view::after{content:'点击放大 RGB 画面';position:absolute;left:7px;bottom:7px;padding:3px 5px;border:1px solid rgba(90,137,145,.7);border-radius:3px;background:rgba(8,18,24,.85);color:#cde5e8;font-size:9px;pointer-events:none}
+#bee-console .camera-frame{width:100%;height:100%;object-fit:contain;background:#05090c}
+#bee-console .camera-minimize{position:absolute;left:14px;top:14px;z-index:3;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 10px;border:1px solid #3d606b;border-radius:5px;background:rgba(13,31,39,.95);color:#cde5e8;font-size:10px;font-weight:650;box-shadow:0 8px 22px rgba(0,0,0,.3);cursor:pointer}
+#bee-console .camera-minimize:hover{border-color:#59a59f;background:#16353b;color:#edffff}
+#bee-console .camera-status{position:absolute;right:14px;top:14px;z-index:3;display:flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid #3a5662;border-radius:5px;background:rgba(8,18,24,.9);color:#aac0c8;font-size:10px;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+#bee-console .camera-status .dot{width:7px;height:7px;border-radius:50%;background:#f0b35a;box-shadow:0 0 0 4px rgba(240,179,90,.12)}
+#bee-console .camera-status.online{color:#d9fffa;border-color:#2f766d}
+#bee-console .camera-status.online .dot{background:#34d4c1;box-shadow:0 0 0 4px rgba(52,212,193,.12)}
+#bee-console .camera-status.error{color:#ffd1d5;border-color:#85434c}
+#bee-console .camera-status.error .dot{background:#e36068;box-shadow:0 0 0 4px rgba(227,96,104,.12)}
+#bee-console .layer-toggle.primary-view{border-color:#4d9b92!important;color:#efffff!important;box-shadow:inset 0 0 0 1px rgba(52,212,193,.28),0 0 10px rgba(52,212,193,.12)}
+#bee-console .map-head-actions{display:flex;align-items:center;gap:8px;min-width:0}
+#bee-console .primary-view-switch{display:flex;align-items:center;padding:2px;border:1px solid #2b424f;border-radius:6px;background:#0e1a22}
+#bee-console .primary-view-switch button{height:28px;display:inline-flex;align-items:center;gap:5px;padding:0 9px;border:1px solid transparent;border-radius:4px;background:transparent;color:#8fa3ad;font-size:10px;font-weight:650;white-space:nowrap}
+#bee-console .primary-view-switch button.active{border-color:#347a76;background:#123c3c;color:#ddfffb;box-shadow:0 0 10px rgba(52,212,193,.12)}
+#bee-console .live-radar-hover{fill:none;stroke:#fff3a8;stroke-width:5;opacity:0;pointer-events:none;filter:drop-shadow(0 0 7px rgba(255,232,126,.95))}
+#bee-console .live-radar-hover.visible{opacity:1}
+#bee-console .live-radar-tooltip{position:absolute;z-index:20;display:none;min-width:168px;padding:8px 10px;border:1px solid #54727d;border-radius:6px;background:rgba(8,16,22,.97);color:#dce9ed;box-shadow:0 12px 32px rgba(0,0,0,.48);font-size:10px;line-height:1.55;pointer-events:none}
+#bee-console .live-radar-tooltip.visible{display:block}
+#bee-console .live-radar-tooltip strong{color:#7ff3e3;font-size:13px}
+#bee-console .live-radar-tooltip .radar-tooltip-title{margin-bottom:3px;color:#a8bbc4;font-size:9px}
+#bee-console .live-radar-tooltip .radar-tooltip-grid{display:grid;grid-template-columns:auto auto;gap:1px 10px}
+#bee-console .live-radar-tooltip .radar-tooltip-grid span:nth-child(odd){color:#80949f}
+#bee-console .status-pill.offline .dot{background:#70818c;box-shadow:0 0 0 4px rgba(112,129,140,.1)}
+#bee-console .status-pill.warning .dot{background:#f0b35a;box-shadow:0 0 0 4px rgba(240,179,90,.1)}
+#bee-console .status-pill.online .dot{background:#34d4c1;box-shadow:0 0 0 4px rgba(52,212,193,.1)}
+#bee-console .task.disabled{opacity:.48;pointer-events:none}
+#bee-console .control-box.disabled{opacity:.48;pointer-events:none}
+#bee-console .side-panel .mission.stage-disabled{opacity:.5;pointer-events:none}
+#bee-console .live-stage-badge{position:absolute;right:14px;bottom:14px;z-index:6;padding:6px 9px;border:1px solid #315361;border-radius:4px;background:rgba(10,18,24,.94);color:#9eb1bc;font-size:10px}
+#bee-console .live-stage-badge.online{color:#7ce8d8;border-color:#2f766d}
+#bee-console .live-stage-badge.error{color:#ff9da6;border-color:#85434c}
+#bee-console .occupancy-grid{opacity:.24;transition:opacity .2s ease}
+#bee-console .occupancy-grid.live-map-active{opacity:1}
+#bee-console .map.radar-expanded .occupancy-grid,#bee-console .map.radar-expanded .live-map-badge,#bee-console .map.radar-expanded .map-readout,#bee-console .map.radar-expanded .map-legend,#bee-console .map.radar-expanded .demo-badge,#bee-console .map.radar-expanded .map-scale{opacity:0;visibility:hidden;pointer-events:none}
+#bee-console .live-map-image{image-rendering:pixelated}
+#bee-console .live-map-grid-overlay{fill:url(#bee-map-grid-pattern);pointer-events:none}
+#bee-console .live-goal-control{cursor:grab;touch-action:none}
+#bee-console .live-goal-control.hold-pending{cursor:progress}
+#bee-console .live-goal-control.dragging{cursor:grabbing}
+#bee-console .live-goal-center-hit,#bee-console .live-goal-arrow-hit,#bee-console .live-waypoint-hit{fill:transparent;stroke:transparent;pointer-events:all}
+#bee-console .live-goal-arrow-hit{stroke-width:.72}
+#bee-console .live-map-selection{fill:#62a9ff;stroke:#e4f1ff;stroke-width:.14;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 4px rgba(98,169,255,.95));pointer-events:all}
+#bee-console .live-goal-arrow{stroke:#8fc6ff;stroke-width:.16;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 3px rgba(98,169,255,.9))}
+#bee-console .live-goal-arrowhead{fill:#8fc6ff;stroke:#e0efff;stroke-width:.08;vector-effect:non-scaling-stroke}
+#bee-console .live-goal-handle{fill:#0d1b25;stroke:#8fc6ff;stroke-width:.16;vector-effect:non-scaling-stroke;pointer-events:all}
+#bee-console .live-goal-control.hold-pending .live-map-selection{fill:#79b8ff;filter:drop-shadow(0 0 7px rgba(98,169,255,1))}
+#bee-console .live-goal-control.dragging .live-map-selection,#bee-console .live-goal-control.dragging .live-goal-handle{fill:#f0b35a;stroke:#fff0c9}
+#bee-console .live-waypoint-marker{fill:#173552;stroke:#9acbff;stroke-width:.12;vector-effect:non-scaling-stroke;cursor:pointer;pointer-events:all}
+#bee-console .live-waypoint-marker.selected{fill:#f0b35a;stroke:#fff0c9}
+#bee-console .live-waypoint-label{fill:#eef7ff;font-size:.55px;font-weight:750;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+#bee-console .live-waypoint-heading{stroke:#b8dcff;stroke-width:.12;vector-effect:non-scaling-stroke;pointer-events:none}
+#bee-console .sim-global{fill:none;stroke:#53ef8c;stroke-width:.22;vector-effect:non-scaling-stroke}
+#bee-console .sim-local{fill:none;stroke:#62d8ff;stroke-width:.18;stroke-dasharray:.45 .25;vector-effect:non-scaling-stroke}
+#bee-console .sim-trail{fill:none;stroke:#c582ff;stroke-width:.16;vector-effect:non-scaling-stroke}
+#bee-console .sim-robot{fill:#49ddd0;stroke:#e8ffff;stroke-width:.10;vector-effect:non-scaling-stroke}
+#bee-console .sim-goal{fill:#62a9ff;stroke:#e1efff;stroke-width:.12;vector-effect:non-scaling-stroke}
+#bee-console .sim-waypoint{fill:#62a9ff;stroke:#dcecff;stroke-width:.10;vector-effect:non-scaling-stroke}
+#bee-console .sim-obstacle{fill:#f06f68;stroke:#ffd0ca;stroke-width:.08;vector-effect:non-scaling-stroke}
+#bee-console .sim-cost{fill:#ff9d45;opacity:.34}
+#bee-console [data-sim-layer][data-hidden="1"]{display:none}
+#bee-console .live-map-badge{position:absolute;left:14px;bottom:48px;z-index:6;padding:6px 9px;border:1px solid #315361;border-radius:4px;background:rgba(10,18,24,.94);color:#9eb1bc;font-size:10px}
+#bee-console .live-map-badge.test{color:#ffdda0;border-color:#7a6138}
+#bee-console .live-map-badge.online{color:#7ce8d8;border-color:#2f766d}
+#bee-console .map-svg,#bee-console .scan,#bee-console .robot,#bee-console .goal,#bee-console [data-layer-target="waypoint"]{display:none!important}
+#bee-console .map-legend.rich{grid-template-columns:repeat(3,auto)}
+#bee-console .map-context{display:none}
+#bee-console .map-context.open{display:grid}
+#bee-console .map-feedback.error{border-color:#8b444c;color:#ffabb2}
+#bee-console .goal-pose-editor{position:absolute;left:12px;bottom:48px;z-index:18;display:none;grid-template-columns:auto minmax(92px,1fr) 58px auto;align-items:center;gap:7px;width:min(430px,calc(100% - 310px));padding:7px 9px;border:1px solid #42677a;border-radius:6px;background:rgba(11,24,32,.96);box-shadow:0 10px 28px rgba(0,0,0,.42);color:#cfe2ea;font-size:10px}
+#bee-console .goal-pose-editor.open{display:grid}
+#bee-console .goal-pose-editor strong{color:#8fc6ff;white-space:nowrap}
+#bee-console .goal-pose-editor input[type="range"]{width:100%;accent-color:#62a9ff}
+#bee-console .goal-pose-editor input[type="number"]{width:52px;height:27px;padding:0 5px;border:1px solid #3c5867;border-radius:4px;background:#101c25;color:#e7f3f6;font-size:10px}
+#bee-console .goal-pose-editor button{height:27px;padding:0 8px;border:1px solid #3d6071;border-radius:4px;background:#17303e;color:#dcecf2;font-size:9px;white-space:nowrap}
+#bee-console .goal-pose-editor button:disabled{opacity:.48;cursor:not-allowed}
+#bee-console .goal-pose-editor .pose-hint{grid-column:1/-1;color:#7f9aa7;font-size:9px}
+#bee-console .repeat-stepper{display:inline-grid!important;grid-template-columns:22px 36px 22px;gap:3px;align-items:center}
+#bee-console .repeat-stepper button,#bee-console .repeat-stepper input{height:24px;min-width:0;padding:0;border:1px solid #334c59;border-radius:4px;background:#12232d;color:#dcecf0;text-align:center;font-size:10px}
+#bee-console .repeat-stepper input{width:36px;appearance:textfield}
+#bee-console .repeat-stepper input::-webkit-inner-spin-button{appearance:none}
+#bee-console .patrol-editor-dialog{position:fixed;inset:0;z-index:130;display:none;place-items:center;padding:12px;background:rgba(3,8,12,.78);backdrop-filter:blur(4px)}
+#bee-console .patrol-editor-dialog.open{display:grid}
+#bee-console .patrol-editor-dialog.map-pick-mode{display:block;padding:0;background:transparent;backdrop-filter:none;pointer-events:none}
+#bee-console .patrol-editor-dialog.map-pick-mode .patrol-editor-card{position:fixed;top:var(--patrol-map-top,220px);left:16px;width:min(360px,calc(100vw - 32px));max-height:calc(100vh - var(--patrol-map-top,220px) - 16px);pointer-events:auto;box-shadow:0 18px 58px rgba(0,0,0,.72)}
+#bee-console .patrol-editor-dialog.map-pick-mode .patrol-editor-note{display:none}
+#bee-console .patrol-editor-dialog.map-pick-mode .patrol-waypoint-list{max-height:min(310px,32vh)}
+#bee-console .patrol-editor-card{width:min(720px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;border:1px solid #355563;border-radius:9px;background:#0f1921;box-shadow:0 24px 80px rgba(0,0,0,.62)}
+#bee-console .patrol-editor-head{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid #263d49;color:#e3f0f3;font-size:13px;font-weight:700}
+#bee-console .patrol-editor-head small{margin-left:8px;color:#78929e;font-size:9px;font-weight:500}
+#bee-console .patrol-editor-close{width:30px;height:30px;border:1px solid #344d59;border-radius:5px;background:#15242e;color:#cfe0e5}
+#bee-console .patrol-editor-body{display:grid;gap:10px;padding:12px}
+#bee-console .patrol-saved{display:grid;grid-template-columns:minmax(0,1fr) repeat(3,auto);align-items:end;gap:6px}
+#bee-console .patrol-saved label{display:grid;gap:5px;min-width:0;color:#8fa6b0;font-size:9px}
+#bee-console .patrol-saved select{width:100%;height:32px;min-width:0;padding:0 7px;border:1px solid #334e5b;border-radius:5px;background:#101e27;color:#edf7f8;font-size:10px}
+#bee-console .patrol-saved button{height:32px;padding:0 9px;border:1px solid #365563;border-radius:5px;background:#142630;color:#d6e7eb;font-size:10px}
+#bee-console .patrol-saved button:disabled{opacity:.45;cursor:not-allowed}
+#bee-console .patrol-saved [data-patrol-tool="delete"]{border-color:#78444a;color:#ffabb2}
+#bee-console .patrol-form{display:grid;grid-template-columns:minmax(180px,1fr) 150px;gap:9px}
+#bee-console .patrol-form label{display:grid;gap:5px;color:#8fa6b0;font-size:9px}
+#bee-console .patrol-form input{height:32px;padding:0 9px;border:1px solid #334e5b;border-radius:5px;background:#101e27;color:#edf7f8;font-size:11px}
+#bee-console .patrol-editor-note{padding:8px 9px;border-left:3px solid #d69a4a;background:#1b211e;color:#b8c8ca;font-size:10px;line-height:1.55}
+#bee-console .patrol-editor-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+#bee-console .patrol-editor-toolbar button,#bee-console .patrol-waypoint-actions button{height:29px;padding:0 9px;border:1px solid #365563;border-radius:5px;background:#142630;color:#d6e7eb;font-size:9px}
+#bee-console .patrol-editor-toolbar button.primary{border-color:#397a75;background:#16413f;color:#8ff0e3}
+#bee-console .patrol-editor-toolbar button.danger-lite{border-color:#78444a;color:#ffabb2}
+#bee-console .patrol-map-status{margin-left:auto;color:#7895a2;font-size:9px}
+#bee-console .patrol-waypoint-list{display:grid;gap:5px;max-height:310px;overflow:auto}
+#bee-console .patrol-waypoint-row{display:grid;grid-template-columns:30px minmax(145px,1fr) 105px auto;align-items:center;gap:7px;padding:7px;border:1px solid #293f4a;border-radius:6px;background:#111f28}
+#bee-console .patrol-waypoint-row.selected{border-color:#bc8740;background:#262319}
+#bee-console .patrol-waypoint-index{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#173552;color:#bdddff;font-size:10px;font-weight:750}
+#bee-console .patrol-waypoint-coord{color:#cbdde2;font-size:10px}.patrol-waypoint-coord small{display:block;margin-top:2px;color:#728c98;font-size:8px}
+#bee-console .patrol-waypoint-yaw{display:flex;align-items:center;gap:4px;color:#829ba6;font-size:8px}.patrol-waypoint-yaw input{width:58px;height:27px;padding:0 5px;border:1px solid #334e5b;border-radius:4px;background:#0d1a22;color:#e8f2f4;font-size:9px}
+#bee-console .patrol-waypoint-actions{display:flex;gap:3px}.patrol-waypoint-actions button{width:27px;padding:0}
+#bee-console .patrol-editor-empty{padding:22px;border:1px dashed #36505c;border-radius:6px;text-align:center;color:#718b97;font-size:10px}
+#bee-console .patrol-editor-footer{display:flex;justify-content:flex-end;gap:7px;padding-top:2px}
+#bee-console .patrol-editor-footer button{height:34px;padding:0 13px;border:1px solid #3b5967;border-radius:5px;background:#172a35;color:#deebee;font-size:10px}
+#bee-console .patrol-editor-footer button.primary{border-color:#397a75;background:#174642;color:#92f0e4}
+#bee-console .patrol-editor-footer button:disabled{opacity:.48;cursor:not-allowed}
+@media(max-width:980px){#bee-console .goal-pose-editor{width:calc(100% - 28px);bottom:82px}.patrol-map-status{width:100%;margin-left:0}}
+@media(max-width:760px){#bee-console .patrol-editor-dialog.map-pick-mode .patrol-editor-card{left:8px;width:min(350px,calc(100vw - 16px))}#bee-console .patrol-editor-dialog.map-pick-mode .patrol-editor-body{gap:7px;padding:8px}}
+@media(max-width:620px){#bee-console .patrol-form{grid-template-columns:1fr}#bee-console .patrol-waypoint-row{grid-template-columns:28px 1fr auto}#bee-console .patrol-waypoint-yaw{grid-column:2}#bee-console .goal-pose-editor{grid-template-columns:auto 1fr 52px}#bee-console .goal-pose-editor button{grid-column:1/-1}}
+#bee-console button:disabled{cursor:not-allowed}
+#bee-console .map-tools button:disabled,#bee-console .layer-toggle:disabled{opacity:.42;pointer-events:none}
+#bee-console .map-readout .dot.amber{background:#f0b35a;box-shadow:0 0 0 4px rgba(240,179,90,.1)}
+#bee-console .system-power{height:34px;display:inline-flex;align-items:center;gap:6px;padding:0 10px;border:1px solid #3b5260;border-radius:6px;background:#14232d;color:#c7d5dc;font-size:11px;font-weight:600;white-space:nowrap}
+#bee-console .system-power:hover{border-color:#668291;background:#1a2d38}
+#bee-console .system-power.poweroff{border-color:#725237;background:#302519;color:#ffd8ae}
+#bee-console .system-power.poweroff:hover{border-color:#a57649;background:#3b2c1c}
+#bee-console .system-power:disabled{opacity:.48}
+#bee-console .voice-toggle{height:34px;display:inline-flex;align-items:center;gap:6px;padding:0 10px;border:1px solid #31515e;border-radius:6px;background:#12232c;color:#b8cbd3;font-size:11px;font-weight:650;white-space:nowrap}
+#bee-console .voice-toggle:hover{border-color:#5a9b9a;background:#17333a;color:#efffff}
+#bee-console .voice-toggle.on{border-color:#2f8b80;background:#123b3b;color:#cffff7}
+#bee-console .voice-toggle.unsupported{border-color:#68434a;background:#2d2026;color:#e1b7bc;cursor:not-allowed}
+#bee-console .auth-user{height:31px;display:inline-flex;align-items:center;gap:6px;padding:0 9px;border-left:1px solid #31434c;color:#a8bbc2;font-size:10px;font-weight:650;white-space:nowrap}
+#bee-console .auth-logout{width:31px;height:31px;display:inline-grid;place-items:center;padding:0;border:1px solid #3b4c54;border-radius:5px;background:#14212a;color:#9fb2ba;cursor:pointer}
+#bee-console .auth-logout span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+#bee-console .auth-logout:hover{border-color:#866068;background:#332329;color:#ffd3d6}
+#bee-console .power-dialog{position:fixed;inset:0;z-index:1000;display:none;place-items:center;padding:20px;background:rgba(3,8,12,.74);backdrop-filter:blur(4px)}
+#bee-console .power-dialog.open{display:grid}
+#bee-console .power-dialog-card{width:min(420px,100%);padding:18px;border:1px solid #3d5562;border-radius:9px;background:#101a23;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+#bee-console .power-dialog-title{font-size:16px;font-weight:700;color:#eef7fa}
+#bee-console .power-dialog-copy{margin-top:10px;color:#9db0ba;font-size:12px;line-height:1.65}
+#bee-console .power-dialog-warning{margin-top:10px;padding:9px 10px;border:1px solid #6f5437;border-radius:5px;background:#2b2218;color:#ffd8a3;font-size:11px;line-height:1.5}
+#bee-console .power-dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+#bee-console .power-dialog-actions button{min-height:36px;padding:0 13px;border-radius:5px;border:1px solid #334a57;background:#172832;color:#d2e0e6;font-size:11px}
+#bee-console .power-dialog-actions .confirm{border-color:#8a4b51;background:#55242c;color:#fff}
+#bee-console .power-toast{position:fixed;left:50%;top:20px;z-index:1100;display:none;transform:translateX(-50%);padding:10px 14px;border:1px solid #315f60;border-radius:6px;background:#10272a;color:#cffff7;box-shadow:0 14px 40px rgba(0,0,0,.4);font-size:12px}
+#bee-console .power-toast.show{display:block}
+#bee-console .power-toast.error{border-color:#84434c;background:#3b2026;color:#ffd1d5}
+#bee-console .diag-toggle{height:31px;display:inline-flex;align-items:center;gap:6px;padding:0 10px;border:1px solid #31515d;border-radius:5px;background:#13232d;color:#c2d6dd;font-size:10px;font-weight:650;cursor:pointer}
+#bee-console .diag-toggle:hover,#bee-console .diag-toggle.active{border-color:#398f86;background:#153c3c;color:#e3fffb}
+#bee-console .diag-dialog{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(3,9,13,.78);backdrop-filter:blur(5px)}
+#bee-console .diag-dialog.open{display:flex}
+#bee-console .diag-card{width:min(760px,calc(100vw - 30px));max-height:calc(100vh - 34px);overflow:auto;border:1px solid #365461;border-radius:9px;background:#0d1820;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+#bee-console .diag-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-bottom:1px solid #263b47;background:#0f1c25}
+#bee-console .diag-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#e3eff2}.diag-title small{font-size:10px;color:#7f969f;font-weight:400}
+#bee-console .diag-close{width:31px;height:31px;border:1px solid #314a56;border-radius:5px;background:#142630;color:#b9cbd2;cursor:pointer}
+#bee-console .diag-body{padding:14px}
+#bee-console .diag-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#bee-console .diag-metric{padding:10px;border:1px solid #263e4a;border-radius:6px;background:#101f28}.diag-metric span{display:block;color:#849aa3;font-size:9px}.diag-metric strong{display:block;margin-top:6px;color:#dcebed;font-size:15px}.diag-metric small{display:block;margin-top:3px;color:#65808a;font-size:8px}
+#bee-console .diag-section{margin-top:12px;padding:12px;border:1px solid #263e4a;border-radius:7px;background:#0f1d25}.diag-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px;color:#d4e4e8;font-size:11px;font-weight:650}.diag-status{color:#7ce8d8;font-size:9px;font-weight:500}
+#bee-console .diag-actions{display:flex;gap:7px;flex-wrap:wrap}.diag-actions button,.diag-bag button{height:30px;padding:0 9px;border:1px solid #31505c;border-radius:5px;background:#142833;color:#c8d9de;font-size:9px;cursor:pointer}.diag-actions button.primary{border-color:#347a76;background:#123c3c;color:#dffffa}.diag-actions button.warn{border-color:#775c31;background:#382c1c;color:#ffe1aa}.diag-actions button:disabled,.diag-bag button:disabled{opacity:.45;cursor:not-allowed}
+#bee-console .diag-bags{display:grid;gap:6px}.diag-bag{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px;border:1px solid #243b46;border-radius:5px;background:#101b23}.diag-bag-copy{min-width:0}.diag-bag-name{overflow:hidden;text-overflow:ellipsis;color:#c9d9de;font-size:10px;white-space:nowrap}.diag-bag-meta{margin-top:3px;color:#70868f;font-size:8px}.diag-bag-actions{display:flex;gap:5px;flex:none}
+#bee-console .diag-empty{padding:13px;text-align:center;color:#70868f;font-size:9px}.diag-note{margin-top:8px;color:#758c95;font-size:9px;line-height:1.55}.diag-error{color:#ffaaa8!important}
+#bee-console .health-unavailable{color:#7f9199!important}
+#bee-console .system-health-card{width:min(690px,calc(100vw - 30px))}
+#bee-console .system-health-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#bee-console .system-health-summary{display:flex;align-items:center;gap:8px;margin-bottom:11px;padding:9px 10px;border:1px solid #29414c;border-radius:6px;background:#101e27;color:#cbdde2;font-size:10px}
+#bee-console .system-health-summary strong{font-size:11px}
+#bee-console .system-health-summary>[data-health-refreshed]{margin-left:auto;color:#718891;font-size:9px}
+#bee-console .system-health-dot{width:8px;height:8px;flex:none;border-radius:50%;background:#34d4c1;box-shadow:0 0 0 4px rgba(52,212,193,.1)}
+#bee-console .system-health-dot.warning{background:#f0b35a;box-shadow:0 0 0 4px rgba(240,179,90,.1)}
+#bee-console .system-health-dot.danger{background:#f45f6d;box-shadow:0 0 0 4px rgba(244,95,109,.1)}
+#bee-console .system-health-note{padding:8px 9px;border:1px solid #344550;border-radius:5px;background:#101b23}
+#bee-console .commissioning-dialog [data-commissioning-blockers]{white-space:pre-line;line-height:1.65}
+#bee-console .map-manager-card{width:min(720px,calc(100vw - 30px))}
+#bee-console .map-save-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+#bee-console .map-save-fields label{display:grid;gap:5px;color:#9eabb8;font-size:11px}
+#bee-console .map-save-fields input{width:100%;box-sizing:border-box;border:1px solid #344452;border-radius:5px;background:#101820;color:#e8f1f5;padding:8px 9px;font:inherit;outline:none}
+#bee-console .map-save-fields input:focus{border-color:#2fc6ad;box-shadow:0 0 0 2px #2fc6ad22}
+@media (max-width:640px){#bee-console .map-save-fields{grid-template-columns:1fr}}
+#bee-console .map-manager-warning{padding:10px 11px;border:1px solid #715737;border-radius:6px;background:#2b2319;color:#ffdda8;font-size:10px;line-height:1.55}
+@media(max-width:760px){#bee-console .live-stage-badge{left:8px;right:auto;bottom:56px}#bee-console .live-map-badge{left:8px;bottom:88px}#bee-console .map:not(.radar-expanded) .live-radar-grid{width:190px;height:116px;right:8px;bottom:126px}#bee-console .map.radar-expanded .live-radar-grid{inset:0;width:100%;height:100%}#bee-console .map.camera-visible:not(.camera-expanded) .camera-view{right:8px;bottom:8px;width:210px;height:132px}#bee-console .live-radar-caption{right:8px;bottom:245px}#bee-console .map.radar-expanded .live-radar-caption{left:8px;right:auto;bottom:88px}#bee-console .radar-minimize,#bee-console .camera-minimize{left:8px;top:8px}#bee-console .camera-status{right:8px;top:8px}#bee-console .map-tools{display:none}#bee-console .primary-view-switch button{padding:0 7px;font-size:9px}}
+@media(max-width:680px){#bee-console .diag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#bee-console .system-health-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#bee-console .diag-dialog{padding:8px}#bee-console .diag-card{width:calc(100vw - 16px);max-height:calc(100vh - 16px)}}
+@media(max-width:760px){#bee-console .auth-user{display:none}}

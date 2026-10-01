@@ -1,0 +1,33 @@
+#ifndef __CHASSIS_H__                                  // 防止底盘适配头文件被重复包含
+#define __CHASSIS_H__                                  // 定义底盘适配头文件包含保护宏
+
+#include <stdint.h>                                    // 提供底盘接口使用的固定宽度整数类型
+
+#define CHASSIS_COMMAND_FORWARD 0x41U                  // 定义掌机前进命令字节
+#define CHASSIS_COMMAND_FORWARD_RIGHT 0x42U            // 定义掌机前进右转命令字节
+#define CHASSIS_COMMAND_ROTATE_RIGHT 0x43U             // 定义掌机原地右转命令字节
+#define CHASSIS_COMMAND_BACKWARD_RIGHT 0x44U           // 定义掌机后退右转命令字节
+#define CHASSIS_COMMAND_BACKWARD 0x45U                 // 定义掌机后退命令字节
+#define CHASSIS_COMMAND_BACKWARD_LEFT 0x46U            // 定义掌机后退左转命令字节
+#define CHASSIS_COMMAND_ROTATE_LEFT 0x47U              // 定义掌机原地左转命令字节
+#define CHASSIS_COMMAND_FORWARD_LEFT 0x48U             // 定义掌机前进左转命令字节
+#define CHASSIS_COMMAND_STOP 0x49U                     // 定义掌机停车命令字节
+
+#define CHASSIS_MANUAL_OUTER_PWM 1800                 // 定义手动控制外侧轮PWM速度
+#define CHASSIS_MANUAL_INNER_PWM 900                  // 定义手动控制转向内侧轮PWM速度
+
+typedef struct                                           // 定义四路编码器速度采样结果
+{
+    int16_t LeftRear;                                    // 保存左后轮十毫秒编码器有符号增量
+    int16_t LeftFront;                                   // 保存左前轮十毫秒编码器有符号增量
+    int16_t RightFront;                                  // 保存右前轮十毫秒编码器有符号增量
+    int16_t RightRear;                                   // 保存右后轮十毫秒编码器有符号增量
+} ChassisSpeedSnapshotTypeDef;                          // 结束四路编码器速度结构体定义
+
+void Chassis_Init(void);                                 // 初始化四个电机PWM、方向和编码器接口
+void Chassis_Stop(void);                                 // 立即关闭四个轮子的PWM输出
+void Chassis_ApplyBluetoothCommand(uint8_t Command);    // 将掌机运动命令转换为四轮差速PWM
+void Chassis_GetSpeedSnapshot(ChassisSpeedSnapshotTypeDef *Snapshot); // 读取四路十毫秒编码器增量
+uint8_t Chassis_EncodeSpeed(int16_t Speed);              // 将有符号编码器增量压缩为协议单字节
+
+#endif                                                // 结束底盘适配头文件包含保护

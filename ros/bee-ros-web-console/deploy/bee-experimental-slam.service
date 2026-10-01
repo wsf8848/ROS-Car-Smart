@@ -1,0 +1,17 @@
+[Unit]
+Description=Bee Experimental No-Chassis SLAM
+After=bee-ld14.service
+Requires=bee-ld14.service
+
+[Service]
+Type=simple
+User=sunrise
+Group=sunrise
+Environment=ROS_DOMAIN_ID=0
+ExecStart=/opt/bee-ros-web-console/deploy/start-experimental-slam.sh
+Restart=no
+TimeoutStopSec=12
+KillMode=control-group
+
+[Install]
+WantedBy=multi-user.target

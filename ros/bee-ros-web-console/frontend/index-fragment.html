@@ -1,0 +1,267 @@
+<link rel="stylesheet" href="/live.css?v=20260927-camera3">
+<div id="bee-console" class="bee-console">
+  <style>
+    #bee-console{--bg:#0b1118;--surface:#111b25;--surface2:#162430;--line:#243746;--text:#e6eef3;--muted:#8193a1;--cyan:#34d4c1;--blue:#62a9ff;--amber:#f0b35a;--red:#f45f6d;--shadow:0 18px 50px rgba(0,0,0,.28);color:var(--text);background:var(--bg);font-family:Inter,"Microsoft YaHei UI","Microsoft YaHei",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:760px;box-sizing:border-box;font-size:13px;letter-spacing:0}
+    #bee-console *,#bee-console *::before,#bee-console *::after{box-sizing:border-box}
+    #bee-console .shell{max-width:1480px;margin:0 auto;padding:18px 22px 22px}
+    #bee-console button{font:inherit;color:inherit;border:0;cursor:pointer;line-height:1}
+    #bee-console button svg{display:block;flex:none}
+    #bee-console .topbar{height:58px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);margin-bottom:16px}
+    #bee-console .brand{display:flex;align-items:center;gap:12px}
+    #bee-console .brand-mark{width:32px;height:32px;flex:none;border:1px solid #4c7984;border-radius:8px;display:grid;place-items:center;color:var(--cyan);background:#102c31}
+    #bee-console .brand-name{font-weight:700}.brand-sub{color:var(--muted);font-size:11px;margin-top:2px}
+    #bee-console .header-right{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+    #bee-console .status-pill{height:30px;display:flex;align-items:center;gap:7px;padding:0 9px;border:1px solid var(--line);border-radius:999px;background:#101a23;color:#b9cad4;font-size:11px;white-space:nowrap}
+    #bee-console .dot{width:7px;height:7px;flex:none;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 4px rgba(52,212,193,.1)}
+    #bee-console .dot.amber{background:var(--amber);box-shadow:0 0 0 4px rgba(240,179,90,.1)}
+    #bee-console .mode{display:flex;align-items:center;gap:7px;padding:0 10px;height:30px;border:1px solid #215b60;color:var(--cyan);background:#102a2d;border-radius:6px;font-size:11px;white-space:nowrap}
+    #bee-console .danger{height:34px;background:#641f2b;color:#fff;border:1px solid #a83b4b;border-radius:6px;padding:0 13px;display:flex;align-items:center;gap:7px;font-weight:700;font-size:12px;white-space:nowrap}
+    #bee-console .grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:stretch}
+    #bee-console .map-panel,#bee-console .side-panel,#bee-console .telemetry,#bee-console .control-box{background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+    #bee-console .map-panel{height:auto;min-height:600px;min-width:0;position:relative;overflow:hidden;border-radius:8px;align-self:stretch}
+    #bee-console .map-head{height:48px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 13px;border-bottom:1px solid var(--line);position:relative;z-index:3}
+    #bee-console .map-title{display:flex;align-items:center;gap:8px;font-weight:600;white-space:nowrap}.map-title span{color:var(--muted);font-size:11px;font-weight:400}
+    #bee-console .map-tools{display:flex;gap:5px;flex:none}
+    #bee-console .icon-btn{width:32px;height:32px;border:1px solid var(--line);border-radius:5px;background:#12202a;display:grid;place-items:center;color:#afc2ce}
+    #bee-console .map{position:absolute;inset:48px 0 0;background:#0c171e;overflow:hidden}
+    #bee-console .gridlines{position:absolute;inset:0;opacity:.25;background-image:linear-gradient(#35515b 1px,transparent 1px),linear-gradient(90deg,#35515b 1px,transparent 1px);background-size:44px 44px}
+    #bee-console .map-water{position:absolute;inset:8% 16% 19% 28%;border:1px solid rgba(67,146,165,.45);border-radius:48% 52% 42% 55%;background:rgba(36,97,112,.12)}
+    #bee-console .wall{position:absolute;height:9px;background:#263c46;border:1px solid #49636d}.wall.a{left:10%;top:19%;width:34%;transform:rotate(-8deg)}.wall.b{left:31%;top:29%;width:31%;transform:rotate(50deg)}.wall.c{left:60%;top:22%;width:22%;transform:rotate(14deg)}.wall.d{left:62%;top:55%;width:22%;transform:rotate(-22deg)}.wall.e{left:15%;top:70%;width:26%;transform:rotate(15deg)}.wall.f{left:40%;top:76%;width:27%;transform:rotate(-5deg)}
+    #bee-console .zone{position:absolute;border:1px dashed rgba(52,212,193,.7);background:rgba(52,212,193,.06);border-radius:8px}.zone.one{left:12%;top:37%;width:22%;height:18%}.zone.two{right:12%;top:35%;width:24%;height:18%}
+    #bee-console .path{position:absolute;left:20%;top:70%;width:62%;height:3px;background:var(--cyan);transform:rotate(-18deg);transform-origin:left center;box-shadow:0 0 12px rgba(52,212,193,.55)}.path:after{content:"";position:absolute;right:0;top:-4px;border-left:9px solid var(--cyan);border-top:5px solid transparent;border-bottom:5px solid transparent}
+    #bee-console .local-path{position:absolute;left:42%;top:63%;width:31%;height:2px;background:var(--blue);transform:rotate(-9deg);transform-origin:left center}
+    #bee-console .scan{position:absolute;left:49%;top:51%;width:220px;height:220px;transform:translate(-50%,-50%);border-radius:50%;background:conic-gradient(from 8deg,rgba(52,212,193,.38),transparent 18deg 42deg,rgba(52,212,193,.2) 43deg 51deg,transparent 52deg 300deg,rgba(52,212,193,.25) 301deg 318deg,transparent 319deg)}
+    #bee-console .scan:before{content:"";position:absolute;inset:22px;border:1px solid rgba(52,212,193,.16);border-radius:50%}
+    #bee-console .robot{position:absolute;left:49%;top:51%;width:22px;height:22px;border-radius:50%;background:#e9fbf8;border:4px solid var(--cyan);box-shadow:0 0 0 6px rgba(52,212,193,.14),0 0 18px rgba(52,212,193,.8);transform:translate(-50%,-50%);z-index:2}
+    #bee-console .robot:after{content:"";position:absolute;left:6px;top:-9px;border-bottom:10px solid var(--cyan);border-left:4px solid transparent;border-right:4px solid transparent}
+    #bee-console .goal{position:absolute;left:78%;top:25%;width:17px;height:17px;border:2px solid var(--amber);transform:rotate(45deg);background:rgba(240,179,90,.18)}
+    #bee-console .waypoint{position:absolute;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#173b42;border:1px solid var(--cyan);color:var(--cyan);font-size:11px;font-weight:600}.w1{left:18%;top:67%}.w2{left:32%;top:47%}.w3{left:53%;top:31%}.w4{left:79%;top:24%}
+    #bee-console .map-legend{position:absolute;left:14px;bottom:14px;display:flex;gap:12px;padding:8px 10px;border-radius:5px;background:rgba(10,18,24,.92);border:1px solid rgba(86,119,130,.45);font-size:11px;color:#c0ced5;z-index:3}.legend-item{display:flex;align-items:center;gap:5px}.swatch{width:9px;height:3px;background:var(--cyan)}.swatch.blue{background:var(--blue)}.swatch.amber{width:8px;height:8px;background:var(--amber);transform:rotate(45deg)}
+    #bee-console .map-scale{position:absolute;right:17px;bottom:48px;color:#c0ced5;font-size:11px;z-index:4}
+    #bee-console .occupancy-floor{position:absolute;inset:5% 5% 8%;background:rgba(36,54,64,.32);clip-path:polygon(4% 10%,40% 6%,44% 18%,70% 18%,72% 8%,95% 15%,92% 42%,98% 45%,94% 86%,63% 91%,61% 82%,35% 84%,32% 94%,6% 88%,9% 60%,2% 56%);border:1px solid rgba(115,139,150,.15)}
+    #bee-console .unknown-zone{position:absolute;inset:7%;opacity:.34;background:repeating-linear-gradient(135deg,transparent 0 8px,rgba(100,121,132,.12) 8px 9px);clip-path:polygon(0 0,100% 0,100% 100%,72% 100%,78% 72%,68% 42%,40% 30%,20% 58%,0 48%)}
+    #bee-console .costmap{position:absolute;border-radius:50%;filter:blur(1px);background:radial-gradient(circle,rgba(244,95,109,.34) 0 14%,rgba(240,179,90,.24) 15% 38%,rgba(240,179,90,.08) 39% 65%,transparent 66%)}
+    #bee-console .costmap.c1{width:150px;height:150px;left:62%;top:29%}#bee-console .costmap.c2{width:115px;height:115px;left:23%;top:57%}
+    #bee-console .obstacle{position:absolute;width:13px;height:13px;border-radius:3px;background:#f06f68;border:2px solid #ffaaa0;box-shadow:0 0 0 7px rgba(240,111,104,.12)}
+    #bee-console .obstacle.o1{left:69%;top:40%}#bee-console .obstacle.o2{left:31%;top:67%}#bee-console .obstacle.o3{left:74%;top:66%}
+    #bee-console .map-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+    #bee-console .scan-point{fill:#66e2d4;opacity:.9}.scan-ray{stroke:#34d4c1;stroke-width:.35;opacity:.18}.trail-line{fill:none;stroke:#b27cff;stroke-width:2.2;stroke-dasharray:3 3;stroke-linecap:round;stroke-linejoin:round}.global-line{fill:none;stroke:#34d4c1;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px rgba(52,212,193,.55))}.local-line{fill:none;stroke:#62a9ff;stroke-width:2.5;stroke-linecap:round}.direction-arrow{fill:#34d4c1}
+    #bee-console .map-readout{position:absolute;left:14px;top:14px;z-index:4;display:flex;gap:7px;flex-wrap:wrap}.map-chip{height:25px;display:flex;align-items:center;gap:6px;padding:0 8px;border:1px solid rgba(86,119,130,.5);border-radius:5px;background:rgba(10,18,24,.9);font-size:10px;color:#b9c9d1}.map-chip b{color:#e5f5f3;font-weight:600}
+    #bee-console .layer-panel{position:absolute;right:13px;top:13px;z-index:5;width:176px;padding:9px;border:1px solid rgba(86,119,130,.55);border-radius:6px;background:rgba(10,18,24,.94);box-shadow:0 12px 30px rgba(0,0,0,.3)}.layer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;font-size:11px;font-weight:650}.layer-head span:last-child{font-size:9px;color:var(--muted);font-weight:400}.layer-list{display:grid;grid-template-columns:1fr 1fr;gap:5px}.layer-toggle{height:25px!important;min-width:0;display:flex;align-items:center;gap:5px;padding:0 6px!important;border:1px solid #263b49!important;border-radius:4px!important;background:#111e27!important;color:#90a3ad!important;font-size:9px!important;white-space:nowrap}.layer-toggle:before{content:"";width:6px;height:6px;border-radius:2px;background:#526671}.layer-toggle.active{border-color:#285f60!important;color:#d2e6e7!important;background:#123035!important}.layer-toggle.active:before{background:var(--cyan);box-shadow:0 0 7px rgba(52,212,193,.7)}
+    #bee-console .map-legend.rich{right:202px;left:auto;display:grid;grid-template-columns:repeat(3,auto);gap:6px 12px}.swatch.purple{background:#b27cff}.swatch.red{width:8px;height:8px;border-radius:2px;background:#f06f68}.swatch.scan-dot{width:6px;height:6px;border-radius:50%;background:#66e2d4}
+    #bee-console .demo-badge{position:absolute;right:14px;bottom:14px;z-index:4;color:#93a5af;font-size:9px;background:rgba(10,18,24,.88);border:1px solid rgba(86,119,130,.42);padding:5px 7px;border-radius:4px}
+    #bee-console .layer-hidden{opacity:0!important;visibility:hidden!important}
+    #bee-console .occupancy-grid{position:absolute;inset:0;width:100%;height:100%;z-index:1;cursor:crosshair}
+    #bee-console .grid-cell{stroke:#13242d;stroke-width:1.1;vector-effect:non-scaling-stroke}.grid-cell.free{fill:#167c55}.grid-cell.unknown{fill:#17242c}.grid-cell.occupied{fill:#bd3945}.grid-cell.route{fill:#26ce83;stroke:#b1ffd5;stroke-width:1.7;filter:drop-shadow(0 0 3px rgba(38,206,131,.75))}
+    #bee-console .map-svg{z-index:2;pointer-events:none}.map-water,#bee-console .wall,#bee-console .zone,#bee-console .costmap,#bee-console .obstacle,#bee-console .robot,#bee-console .goal,#bee-console .waypoint,#bee-console .scan{z-index:3}
+    #bee-console .robot{background:#e9fbf8;border-color:#34d4c1}.robot:after{border-bottom-color:#34d4c1}
+    #bee-console .goal{width:20px;height:20px;border:2px solid #62a9ff;background:rgba(98,169,255,.25);box-shadow:0 0 0 6px rgba(98,169,255,.13),0 0 14px rgba(98,169,255,.6);transform:translate(-50%,-50%) rotate(45deg)}
+    #bee-console .waypoint{background:#102943;border-color:#62a9ff;color:#b9dbff}
+    #bee-console .map-context{position:absolute;z-index:10;display:none;width:168px;padding:6px;background:#101b24;border:1px solid #38515e;border-radius:6px;box-shadow:0 12px 32px rgba(0,0,0,.48)}#bee-console .map-context.open{display:grid;gap:4px}.context-title{padding:5px 7px 7px;color:#94a8b2;font-size:10px;border-bottom:1px solid #293d49;margin-bottom:2px}.context-action{height:34px!important;display:flex;align-items:center;justify-content:flex-start;gap:8px;padding:0 8px!important;border:1px solid transparent!important;border-radius:4px!important;background:transparent!important;color:#dce8ec!important;font-size:11px!important;text-align:left}.context-action:hover,.context-action:focus-visible{background:#1b303c!important;border-color:#345261!important}.context-action.primary{color:#b8d9ff!important}.map-feedback{position:absolute;left:50%;top:56px;z-index:9;transform:translateX(-50%);padding:7px 11px;border:1px solid #355362;border-radius:5px;background:rgba(10,18,24,.96);color:#d8e8ec;font-size:11px;white-space:nowrap;display:none}.map-feedback.show{display:block}
+    #bee-console .map-legend.rich{grid-template-columns:repeat(3,auto)}.swatch.free{height:8px;width:8px;border-radius:2px;background:#20b879}.swatch.occupied{height:8px;width:8px;border-radius:2px;background:#d44c56}.swatch.route{height:8px;width:8px;border-radius:2px;background:#26ce83;box-shadow:0 0 5px rgba(38,206,131,.65)}.swatch.blue{height:8px;width:8px;border-radius:2px;background:#62a9ff}
+    #bee-console .side{display:flex;flex-direction:column;gap:12px;min-width:0}
+    #bee-console .side-panel{border-radius:8px;padding:13px;min-width:0}
+    #bee-console .panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}.panel-title{font-weight:600}.panel-meta{font-size:11px;color:var(--muted);white-space:nowrap}
+    #bee-console .task-list{display:grid;gap:6px}.task{min-height:57px;display:flex;align-items:center;justify-content:space-between;gap:7px;padding:8px;border:1px solid var(--line);background:#101a23;border-radius:6px}.task.active,.task.ready{border-color:#2b7775;background:#102c31}.task.blocked{border-color:#5b4a2c;background:#241f18}.task-left{display:flex;align-items:center;gap:8px;min-width:0}.task-icon{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:5px;background:#1b2b37;color:#aebec7}.task.active .task-icon,.task.ready .task-icon{background:#18504e;color:var(--cyan)}.task.blocked .task-icon{background:#49391d;color:#ffbd62}.task-copy{min-width:0}.task-name{font-size:12px;font-weight:600;white-space:nowrap}.task-sub{color:var(--muted);font-size:11px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.task-state{font-size:11px;color:var(--cyan);white-space:nowrap}.task.blocked .task-state{color:#ffbd62}.task button{min-height:30px;padding:0 9px;font-size:11px;color:#c3d3db;background:#172833;border:1px solid var(--line);border-radius:5px;white-space:nowrap}
+    #bee-console .mission{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}.mission-row{display:flex;justify-content:space-between;gap:12px;color:#b6c7d0;font-size:11px;margin:7px 0}.mission-row span:last-child{color:#e6eef3;text-align:right}.progress{height:5px;background:#1b2a35;border-radius:99px;overflow:hidden;margin-top:9px}.progress i{display:block;height:100%;width:68%;background:var(--cyan);border-radius:99px}
+    #bee-console .action-row{display:flex;gap:7px;margin-top:12px}.small-btn{min-width:0;min-height:36px;flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 9px;border-radius:5px;background:#172833;border:1px solid var(--line);font-size:11px;line-height:1.2;color:#d1dce2;white-space:nowrap}.small-btn.primary{background:#124443;border-color:#276f6b;color:#d7fffa}.small-btn.warn{background:#382c1c;border-color:#6e5832;color:#ffdfa8}
+    #bee-console .fault{display:flex;align-items:center;gap:9px;padding:10px;background:#151f28;border:1px solid var(--line);border-radius:6px;font-size:11px;color:#c0ced5}.fault b{color:var(--cyan)}
+    #bee-console .telemetry{grid-column:1/-1;border-radius:8px;padding:13px 14px}.telemetry-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}.metric{padding:9px 10px;background:#101a23;border:1px solid var(--line);border-radius:6px;min-width:0}.metric-label{color:#9aabb5;font-size:11px}.metric-value{margin-top:6px;font-size:17px;font-weight:650}.metric-unit{font-size:11px;color:#b2c0c8;font-weight:400;margin-left:3px}.metric-sub{margin-top:4px;color:#9aabb5;font-size:11px}.metric-good{color:var(--cyan)}.metric-warn{color:var(--amber)}
+    #bee-console .bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:12px}.control-box{min-width:0;border-radius:8px;padding:13px}.control-box .panel-head{margin-bottom:10px}
+    #bee-console .joystick{display:grid;grid-template-columns:repeat(3,38px);grid-template-rows:repeat(3,34px);gap:4px;justify-content:center;align-items:center;flex:none}.joy{width:38px;height:34px;border:1px solid var(--line);background:#152531;border-radius:5px;color:#b5c5cd;display:grid;place-items:center}.joy.center{background:#164642;color:var(--cyan);border-color:#2f7974}
+    #bee-console .joystick .joy:nth-child(1){grid-column:2;grid-row:1}#bee-console .joystick .joy:nth-child(3){grid-column:1;grid-row:2}#bee-console .joystick .joy:nth-child(4){grid-column:2;grid-row:2}#bee-console .joystick .joy:nth-child(5){grid-column:3;grid-row:2}#bee-console .joystick .joy:nth-child(7){grid-column:2;grid-row:3}#bee-console .joystick>span{display:none}
+    #bee-console .override{display:flex;align-items:center;justify-content:space-between;gap:12px}.override-copy{flex:1;min-width:0}.override-title{font-size:12px;font-weight:600}.override-sub{font-size:11px;color:#a2b1b9;line-height:1.45;margin-top:4px}.takeover{min-height:38px;padding:0 11px;background:#1e3e46;border:1px solid #347f82;border-radius:5px;color:#d9fffa;font-weight:600;font-size:11px;white-space:nowrap}
+    @media(max-width:1180px){#bee-console .topbar{height:auto;min-height:58px;align-items:flex-start;flex-wrap:wrap;padding-bottom:11px}#bee-console .header-right{width:100%;justify-content:flex-start}#bee-console .grid{grid-template-columns:minmax(0,1fr) 320px}}
+    @media(max-width:980px){#bee-console .grid{grid-template-columns:minmax(0,1fr)}#bee-console .map-panel{height:clamp(470px,58vh,600px)}#bee-console .side{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#bee-console .telemetry-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#bee-console .bottom{grid-template-columns:minmax(0,1fr)}}
+    @media(max-width:640px){#bee-console .shell{padding:12px 10px 16px}#bee-console .brand{min-width:0}#bee-console .brand-sub{display:none}#bee-console .header-right{gap:5px}#bee-console .status-pill{height:28px;font-size:11px;padding:0 7px}#bee-console .status-pill:nth-child(n+4){display:none}#bee-console .mode{flex:1;justify-content:center}#bee-console .danger{height:32px;padding:0 10px}#bee-console .map-panel{height:clamp(400px,56vh,520px)}#bee-console .map-head{padding:0 9px}.map-title{font-size:12px}.map-title span{display:none}#bee-console .icon-btn{width:30px;height:30px}#bee-console .map-legend{left:8px;bottom:8px;gap:8px;padding:7px;font-size:10px}#bee-console .map-scale{right:9px;bottom:11px}#bee-console .side{display:flex}#bee-console .telemetry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#bee-console .override{flex-wrap:wrap;align-items:flex-start}#bee-console .override-copy{flex:1 1 190px}#bee-console .takeover{flex:none}#bee-console .joystick{flex:0 0 100%;margin:3px auto 0}}
+    /* Layout corrections: keep the map stable while allowing every panel to shrink cleanly. */
+    #bee-console{width:100%;min-width:0;overflow-x:hidden}
+    #bee-console .shell{width:100%;max-width:1480px;min-width:0}
+    #bee-console .topbar{min-height:58px;height:auto;align-items:center;gap:12px}
+    #bee-console .brand{min-width:220px;flex:0 1 auto}
+    #bee-console .header-right{min-width:0;flex:1 1 620px;justify-content:flex-end;flex-wrap:wrap;gap:7px}
+    #bee-console .grid{grid-template-columns:minmax(0,1fr) clamp(300px,24vw,360px);align-items:start}
+    #bee-console .map-panel{height:auto;min-height:600px}
+    #bee-console .side,#bee-console .side-panel,#bee-console .telemetry,#bee-console .control-box{min-width:0}
+    #bee-console .task-left,#bee-console .override-copy{min-width:0}
+    #bee-console .task-name,#bee-console .task-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    #bee-console .mission-row span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    #bee-console .telemetry-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+    #bee-console .metric{min-width:0}
+    #bee-console .bottom{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    #bee-console .override{min-width:0}
+    @media(max-width:1180px){#bee-console .topbar{align-items:flex-start;padding-bottom:12px}#bee-console .brand{flex:1 1 240px}#bee-console .header-right{flex-basis:100%;justify-content:flex-start}}
+    @media(max-width:980px){#bee-console .grid{grid-template-columns:minmax(0,1fr)}#bee-console .map-panel{height:auto;min-height:540px}#bee-console .side{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#bee-console .telemetry-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#bee-console .bottom{grid-template-columns:minmax(0,1fr)}}
+    @media(max-width:680px){#bee-console .shell{padding:12px 10px 16px}#bee-console .topbar{padding-bottom:10px}#bee-console .header-right{gap:6px}#bee-console .status-pill{padding:0 8px}#bee-console .mode{flex:0 0 auto;justify-content:center}#bee-console .side{display:flex}#bee-console .map-panel{height:auto;min-height:480px}#bee-console .telemetry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#bee-console .bottom{grid-template-columns:minmax(0,1fr)}#bee-console .override{align-items:flex-start;flex-wrap:wrap}#bee-console .override-copy{flex:1 1 220px}#bee-console .takeover{flex:0 0 auto}#bee-console .joystick{margin:2px auto 0;flex:0 0 100%}#bee-console .layer-panel{display:none}#bee-console .layer-panel.mobile-open{display:block;top:48px;right:8px;width:180px}#bee-console .map-readout{top:8px;left:8px}#bee-console .map-chip:nth-child(n+3){display:none}#bee-console .map-legend.rich{left:8px;right:auto;grid-template-columns:repeat(2,auto)}}
+    /* Compact operations layout: vehicle state above, all controls on the right. */
+    #bee-console .vehicle-strip{margin-bottom:12px;padding:9px 11px;box-shadow:none}
+    #bee-console .vehicle-strip .panel-head{margin-bottom:7px}
+    #bee-console .vehicle-strip .panel-title{display:flex;align-items:center;gap:7px;font-size:12px}
+    #bee-console .vehicle-strip .telemetry-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+    #bee-console .vehicle-strip .metric{min-height:58px;padding:7px 9px}
+    #bee-console .vehicle-strip .metric-label{font-size:9px}
+    #bee-console .vehicle-strip .metric-value{margin-top:3px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    #bee-console .vehicle-strip .metric-unit{font-size:9px}
+    #bee-console .vehicle-strip .metric-sub{margin-top:2px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    #bee-console .grid{grid-template-columns:minmax(0,1fr) clamp(330px,25vw,380px)}
+    #bee-console .map-panel{min-height:690px}
+    #bee-console .side{gap:8px}
+    #bee-console .side-panel,#bee-console .side-control{padding:10px 11px;box-shadow:none}
+    #bee-console .side .panel-head{margin-bottom:7px}
+    #bee-console .side .panel-title{font-size:12px}
+    #bee-console .side .panel-meta{font-size:9px}
+    #bee-console .side .task-list{gap:4px}
+    #bee-console .side .task{min-height:43px;padding:6px 7px}
+    #bee-console .side .task-icon{width:26px;height:26px}
+    #bee-console .side .task-name{font-size:11px}
+    #bee-console .side .task-sub,#bee-console .side .task-state{font-size:9px}
+    #bee-console .side .mission{margin-top:8px;padding-top:7px}
+    #bee-console .side .mission-row{margin:5px 0;font-size:10px}
+    #bee-console .side .action-row{margin-top:8px;gap:5px}
+    #bee-console .side .small-btn{min-height:31px;padding:0 6px;font-size:9px}
+    #bee-console .side-control{border-radius:8px}
+    #bee-console .side-control .override{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px 8px;align-items:center}
+    #bee-console .side-control .override-title{font-size:11px}
+    #bee-console .side-control .override-sub{font-size:9px;line-height:1.35}
+    #bee-console .side-control .takeover{min-height:32px;padding:0 9px;font-size:9px}
+    #bee-console .side-control .joystick{grid-column:1/-1;grid-template-columns:repeat(3,34px);grid-template-rows:repeat(3,29px);gap:3px;margin:-2px auto 0}
+    #bee-console .side-control .joy{width:34px;height:29px}
+    #bee-console .side-patrol .mission-row{margin:5px 0}
+    #bee-console .bottom{display:none}
+    /* Desktop cockpit: keep the whole control surface inside one viewport, including scaled Windows displays. */
+    @media(min-width:981px) and (min-height:700px){
+      #bee-console{height:100vh;min-height:0;overflow:hidden}
+      #bee-console .shell{height:100%;display:grid;grid-template-rows:auto auto minmax(0,1fr);padding-top:10px;padding-bottom:10px}
+      #bee-console .topbar{min-height:50px;margin-bottom:9px}
+      #bee-console .vehicle-strip{margin-bottom:9px;padding:7px 9px}
+      #bee-console .vehicle-strip .panel-head{margin-bottom:5px}
+      #bee-console .vehicle-strip .metric{min-height:52px;padding:5px 8px}
+      #bee-console .grid{min-height:0;align-items:stretch}
+      #bee-console .map-panel{height:100%;min-height:0}
+      #bee-console .side{height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-right:2px;scrollbar-width:thin;scrollbar-color:#31515e transparent}
+      #bee-console .side::-webkit-scrollbar{width:6px}
+      #bee-console .side::-webkit-scrollbar-thumb{background:#31515e;border-radius:999px}
+      #bee-console .side .task-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+      #bee-console .side .task{min-height:39px;padding:5px 6px}
+      #bee-console .side .task-icon{width:24px;height:24px}
+      #bee-console .side .task-sub{display:none}
+      #bee-console .side .task-name{font-size:10px}
+      #bee-console .side .task-state{font-size:8px}
+      #bee-console .side .task button{min-height:26px;padding:0 7px;font-size:9px}
+      #bee-console .side .mission{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:6px;padding-top:6px}
+      #bee-console .side .mission-row{display:grid;gap:2px;margin:0;padding:4px 5px;border-radius:4px;background:#101a23;font-size:8px}
+      #bee-console .side .mission-row span:last-child{text-align:left;font-size:9px}
+      #bee-console .side .progress,#bee-console .side .mission>.action-row{grid-column:1/-1}
+      #bee-console .side .progress{margin-top:0}
+      #bee-console .side .mission>.action-row{margin-top:0}
+      #bee-console .side-control .override{grid-template-columns:minmax(0,1fr) 104px;grid-template-rows:auto auto;align-items:center}
+      #bee-console .side-control .override-copy{grid-column:1;grid-row:1}
+      #bee-console .side-control .takeover{grid-column:1;grid-row:2;justify-self:start}
+      #bee-console .side-control .joystick{grid-column:2;grid-row:1/3;margin:0;grid-template-columns:repeat(3,32px);grid-template-rows:repeat(3,27px)}
+      #bee-console .side-control .joy{width:32px;height:27px}
+      #bee-console .side>section:nth-child(2){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 8px}
+      #bee-console .side>section:nth-child(2) .panel-head,#bee-console .side>section:nth-child(2) .fault{grid-column:1/-1}
+      #bee-console .side>section:nth-child(2) .panel-head{margin-bottom:0}
+      #bee-console .side>section:nth-child(2) .fault{padding:6px 8px}
+      #bee-console .side>section:nth-child(2) .mission-row{display:flex;padding:0;background:transparent;font-size:8px}
+      #bee-console .side>section:nth-child(2) .mission-row span:last-child{text-align:right;font-size:8px}
+      #bee-console .side-patrol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 7px}
+      #bee-console .side-patrol .panel-head,#bee-console .side-patrol .action-row{grid-column:1/-1}
+      #bee-console .side-patrol .panel-head{margin-bottom:0}
+      #bee-console .side-patrol .mission-row{display:grid;gap:2px;margin:0;padding:4px 5px;border-radius:4px;background:#101a23;font-size:8px}
+      #bee-console .side-patrol .mission-row span:last-child{text-align:left;font-size:8px}
+      #bee-console .side-patrol .action-row{margin-top:2px}
+    }
+    @media(max-width:1180px){#bee-console .vehicle-strip .telemetry-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#bee-console .grid{grid-template-columns:minmax(0,1fr) 340px}#bee-console .map-panel{min-height:720px}}
+    @media(min-width:981px) and (max-width:1180px) and (min-height:700px){#bee-console .map-panel{min-height:0}}
+    @media(max-width:980px){#bee-console .vehicle-strip .telemetry-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#bee-console .map-panel{min-height:560px}#bee-console .side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}#bee-console .side-control .joystick{margin:2px auto 0}}
+    @media(max-width:680px){#bee-console .vehicle-strip{padding:8px;margin-bottom:9px}#bee-console .vehicle-strip .panel-meta{display:none}#bee-console .vehicle-strip .telemetry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#bee-console .vehicle-strip .metric{min-height:55px}#bee-console .side{display:flex}#bee-console .side-control .override{grid-template-columns:minmax(0,1fr) auto}#bee-console .side-control .joystick{flex:initial;margin:0 auto}}
+  </style>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark"><i data-lucide="radar" aria-hidden="true"></i></div><div><div class="brand-name">Bee ROS Web Console</div><div class="brand-sub">RDK X5 · 四驱自主导航平台</div></div></div>
+      <div class="header-right"><div class="status-pill"><span class="dot"></span>RDK 在线</div><div class="status-pill"><span class="dot"></span>STM32 在线</div><div class="status-pill"><span class="dot"></span>LD14 · 10 Hz</div><div class="status-pill"><span class="dot amber"></span>IMU · 校准</div><button class="voice-toggle" type="button" data-voice-toggle aria-pressed="false" title="打开或关闭Windows语音提示"><i data-lucide="volume-x" aria-hidden="true"></i><span>语音关闭</span></button><div class="auth-user" title="当前登录管理员"><i data-lucide="user-round" aria-hidden="true"></i><span data-auth-user>管理员</span></div><button class="auth-logout" type="button" data-auth-logout title="退出当前账号"><i data-lucide="log-out" aria-hidden="true"></i><span>退出</span></button><div class="mode"><i data-lucide="navigation" aria-hidden="true"></i><strong>ROS 自主</strong></div><button class="system-power reboot" type="button" data-power-action="reboot" title="重启RDK X5板卡"><i data-lucide="rotate-cw" aria-hidden="true"></i>重启板卡</button><button class="system-power poweroff" type="button" data-power-action="poweroff" title="安全关闭RDK X5板卡"><i data-lucide="power" aria-hidden="true"></i>关闭板卡</button><button class="danger" type="button" data-tooltip="立即停止所有运动"><i data-lucide="octagon-alert" aria-hidden="true"></i>急停</button></div>
+    </header>
+    <section class="telemetry vehicle-strip" aria-label="车辆实时状态"><div class="panel-head"><div class="panel-title"><i data-lucide="gauge" aria-hidden="true"></i>车辆实时状态</div><div class="panel-meta">最后更新 10:24:18 · 延迟 24 ms</div></div><div class="telemetry-grid"><div class="metric"><div class="metric-label">线速度</div><div class="metric-value">0.42<span class="metric-unit">m/s</span></div><div class="metric-sub">目标 0.50 m/s</div></div><div class="metric"><div class="metric-label">角速度</div><div class="metric-value">0.08<span class="metric-unit">rad/s</span></div><div class="metric-sub">左转微调</div></div><div class="metric"><div class="metric-label">四轮速度</div><div class="metric-value metric-good">闭环<span class="metric-unit">PID</span></div><div class="metric-sub">误差 2.1%</div></div><div class="metric"><div class="metric-label">电池</div><div class="metric-value">78<span class="metric-unit">%</span></div><div class="metric-sub">16.4 V · 正常</div></div><div class="metric"><div class="metric-label">定位质量</div><div class="metric-value metric-good">稳定</div><div class="metric-sub">协方差 0.018</div></div><div class="metric"><div class="metric-label">最近故障</div><div class="metric-value metric-good">无</div><div class="metric-sub">安全链路正常</div></div></div></section>
+    <main class="grid">
+      <section class="map-panel" aria-label="地图与实时路径">
+        <div class="map-head"><div class="map-title"><i data-lucide="map" aria-hidden="true"></i>实时地图 <span>warehouse-a · 定位稳定</span></div><div class="map-head-actions"><div class="primary-view-switch" role="group" aria-label="主画面切换"><button type="button" data-primary-view="map" aria-pressed="true"><i data-lucide="map" aria-hidden="true"></i>栅格地图</button><button type="button" data-primary-view="radar" aria-pressed="false"><i data-lucide="radar" aria-hidden="true"></i>LD14扫描</button><button type="button" data-primary-view="camera" aria-pressed="false"><i data-lucide="video" aria-hidden="true"></i>RGB摄像头</button></div><div class="map-tools"><button class="icon-btn" type="button" data-tooltip="设置初始位姿"><i data-lucide="crosshair" aria-hidden="true"></i></button><button class="icon-btn" type="button" data-tooltip="添加航点"><i data-lucide="map-pin-plus" aria-hidden="true"></i></button><button class="icon-btn" type="button" data-tooltip="适配视图"><i data-lucide="scan" aria-hidden="true"></i></button><button class="icon-btn" type="button" data-tooltip="地图图层"><i data-lucide="layers-3" aria-hidden="true"></i></button></div></div></div>
+        <div class="map">
+          <svg class="occupancy-grid" viewBox="0 0 1000 550" preserveAspectRatio="none" aria-label="占据栅格地图：绿色为可通行，红色为障碍，深灰色为未探索区域"></svg>
+          <svg class="map-svg" viewBox="0 0 1000 550" preserveAspectRatio="none" aria-label="导航地图实时叠加示意">
+            <g data-layer-target="cost"><circle cx="690" cy="225" r="57" fill="rgba(220,65,68,.16)"/><circle cx="690" cy="225" r="32" fill="rgba(220,65,68,.23)"/><circle cx="310" cy="395" r="46" fill="rgba(220,65,68,.16)"/><circle cx="310" cy="395" r="25" fill="rgba(220,65,68,.22)"/></g>
+            <g data-layer-target="obstacle"><rect x="680" y="215" width="20" height="20" rx="3" fill="#d84d58" stroke="#ff9a9e" stroke-width="2"/><rect x="300" y="385" width="20" height="20" rx="3" fill="#d84d58" stroke="#ff9a9e" stroke-width="2"/><rect x="742" y="352" width="20" height="20" rx="3" fill="#d84d58" stroke="#ff9a9e" stroke-width="2"/></g>
+            <g data-layer-target="trail"><path class="trail-line" d="M178 430 C225 422 274 398 310 370 S365 328 412 337 S454 358 490 325"/></g>
+            <g data-layer-target="global"><path class="global-line" d="M490 325 C548 318 580 280 642 264 S752 222 820 158"/><path class="direction-arrow" d="M820 158 l-13 -1 l7 12 z"/></g>
+            <g data-layer-target="local"><path class="local-line" d="M490 325 C528 318 557 297 590 282 S631 269 669 257"/></g>
+            <g data-layer-target="scan">
+              <path class="scan-ray" d="M490 325 L392 186 M490 325 L443 162 M490 325 L541 174 M490 325 L603 203 M490 325 L650 289 M490 325 L629 383 M490 325 L551 447 M490 325 L420 438 M490 325 L344 392 M490 325 L324 302 M490 325 L354 237"/>
+              <circle class="scan-point" cx="392" cy="186" r="3"/><circle class="scan-point" cx="443" cy="162" r="3"/><circle class="scan-point" cx="541" cy="174" r="3"/><circle class="scan-point" cx="603" cy="203" r="3"/><circle class="scan-point" cx="650" cy="289" r="3"/><circle class="scan-point" cx="629" cy="383" r="3"/><circle class="scan-point" cx="551" cy="447" r="3"/><circle class="scan-point" cx="420" cy="438" r="3"/><circle class="scan-point" cx="344" cy="392" r="3"/><circle class="scan-point" cx="324" cy="302" r="3"/><circle class="scan-point" cx="354" cy="237" r="3"/>
+            </g>
+          </svg>
+          <div class="scan" data-layer-target="scan"></div><div class="robot" data-layer-target="robot"></div><div class="goal" data-layer-target="goal" aria-label="当前目标点"></div>
+          <div data-layer-target="waypoint"><div class="waypoint w1">1</div><div class="waypoint w2">2</div><div class="waypoint w3">3</div><div class="waypoint w4">4</div></div>
+          <div class="map-readout"><span class="map-chip"><span class="dot"></span><b>定位稳定</b></span><span class="map-chip">坐标 <b>8.42, 3.16</b></span><span class="map-chip">航向 <b>37.8°</b></span><span class="map-chip">地图 <b>warehouse-a</b></span></div>
+          <div class="layer-panel"><div class="layer-head"><span>地图图层</span><span>10 / 10 可见</span></div><div class="layer-list"><button class="layer-toggle active" data-layer="grid">栅格地图</button><button class="layer-toggle active" data-layer="robot">车辆位姿</button><button class="layer-toggle active" data-layer="scan">LD14扫描</button><button class="layer-toggle active" data-layer="global">全局路径</button><button class="layer-toggle active" data-layer="local">局部轨迹</button><button class="layer-toggle active" data-layer="goal">当前目标</button><button class="layer-toggle active" data-layer="waypoint">巡逻航点</button><button class="layer-toggle active" data-layer="cost">代价地图</button><button class="layer-toggle active" data-layer="trail">行驶轨迹</button><button class="layer-toggle active" data-layer="obstacle">障碍物</button></div></div>
+          <div class="map-context" role="menu" aria-label="地图点操作"><div class="context-title">地图点 <span class="context-coordinate">--</span></div><button class="context-action" type="button" data-map-action="mark"><i data-lucide="map-pin" aria-hidden="true"></i>标定此点</button><button class="context-action primary" type="button" data-map-action="navigate"><i data-lucide="navigation" aria-hidden="true"></i>导航到此点</button></div>
+          <div class="map-feedback" role="status" aria-live="polite"></div>
+          <div class="map-legend rich"><span class="legend-item"><i class="swatch free"></i>可通行</span><span class="legend-item"><i class="swatch occupied"></i>障碍物</span><span class="legend-item"><i class="swatch route"></i>规划路线</span><span class="legend-item"><i class="swatch blue"></i>标定/目标</span><span class="legend-item"><i class="swatch scan-dot"></i>雷达回波</span><span class="legend-item"><i class="swatch" style="background:#27343d;height:8px;width:8px"></i>未探索</span></div><div class="demo-badge">UI 演示数据 · 待接入 ROS2</div><div class="map-scale">5 m</div>
+        </div>
+      </section>
+      <aside class="side">
+        <section class="side-panel" data-task-panel><div class="panel-head"><div class="panel-title">任务控制</div><div class="panel-meta" data-task-mode>ROS2 / Nav2 · 安全锁定</div></div><div class="task-list"><div class="task blocked" data-task-card="navigate"><div class="task-left"><div class="task-icon"><i data-lucide="navigation" aria-hidden="true"></i></div><div class="task-copy"><div class="task-name">自主导航</div><div class="task-sub">等待实体底盘与定位链路</div></div></div><span class="task-state">锁定</span></div><div class="task blocked" data-task-card="avoidance"><div class="task-left"><div class="task-icon"><i data-lucide="shield-check" aria-hidden="true"></i></div><div class="task-copy"><div class="task-name">导航避障</div><div class="task-sub">等待LD14与局部代价地图</div></div></div><span class="task-state">待检</span></div><div class="task blocked" data-task-card="planning"><div class="task-left"><div class="task-icon"><i data-lucide="route" aria-hidden="true"></i></div><div class="task-copy"><div class="task-name">路径规划</div><div class="task-sub">等待地图与Nav2规划器</div></div></div><span class="task-state">待检</span></div><div class="task blocked" data-task-card="patrol"><div class="task-left"><div class="task-icon"><i data-lucide="repeat-2" aria-hidden="true"></i></div><div class="task-copy"><div class="task-name">定点巡逻</div><div class="task-sub">可编辑任务，实体执行未解锁</div></div></div><button type="button" data-task-open-patrol>打开</button></div></div><div class="mission"><div class="mission-row"><span>任务状态</span><span data-task-field="state">安全锁定</span></div><div class="mission-row"><span>就绪检查</span><span data-task-field="readiness">0 / 6</span></div><div class="mission-row"><span>阻塞原因</span><span data-task-field="reason">等待实体底盘验收</span></div><div class="progress"><i data-task-progress></i></div><div class="action-row"><button class="small-btn warn" type="button" data-task-action="pause" disabled><i data-lucide="pause" aria-hidden="true"></i>暂停</button><button class="small-btn" type="button" data-task-action="cancel" disabled><i data-lucide="x" aria-hidden="true"></i>取消任务</button></div></div></section>
+        <section class="side-panel"><div class="panel-head"><div class="panel-title">控制源</div><div class="panel-meta">互斥仲裁</div></div><div class="fault"><span class="dot"></span><span>当前由 <b>ROS 自主</b> 控制</span></div><div class="mission-row"><span>人工接管</span><span>待命 · 蓝牙 / MQTT</span></div><div class="mission-row"><span>安全策略</span><span class="metric-good">已启用</span></div></section>
+        <section class="control-box side-control"><div class="panel-head"><div class="panel-title">人工接管</div><div class="panel-meta">按住移动 · 松开归零</div></div><div class="override"><div class="override-copy"><div class="override-title">接管 ROS 自主</div><div class="override-sub">蓝牙 / MQTT 优先级高于 ROS，接管前自动停止导航。</div></div><button class="takeover" type="button"><i data-lucide="hand" aria-hidden="true"></i>请求接管</button><div class="joystick" aria-label="人工方向控制"><button class="joy" type="button" aria-label="前进"><i data-lucide="arrow-up" aria-hidden="true"></i></button><span></span><button class="joy" type="button" aria-label="左转"><i data-lucide="arrow-left" aria-hidden="true"></i></button><button class="joy center" type="button" aria-label="停止"><i data-lucide="circle-stop" aria-hidden="true"></i></button><button class="joy" type="button" aria-label="右转"><i data-lucide="arrow-right" aria-hidden="true"></i></button><span></span><button class="joy" type="button" aria-label="后退"><i data-lucide="arrow-down" aria-hidden="true"></i></button></div></div></section>
+        <section class="control-box side-control side-patrol"><div class="panel-head"><div class="panel-title">巡逻任务</div><div class="panel-meta" data-patrol-summary>0 个航点 · 未编辑</div></div><div class="mission-row"><span>任务名称</span><span data-patrol-name-summary>未命名任务</span></div><div class="mission-row patrol-repeat-row"><span>巡逻次数</span><span class="repeat-stepper"><button type="button" data-repeat-step="-1" aria-label="减少巡逻次数">−</button><input type="number" data-patrol-repeat min="1" max="99" value="1" aria-label="巡逻次数"><button type="button" data-repeat-step="1" aria-label="增加巡逻次数">＋</button></span></div><div class="action-row"><button class="small-btn primary" type="button" data-patrol-action="edit"><i data-lucide="list-plus" aria-hidden="true"></i>编辑航点</button><button class="small-btn" type="button" data-patrol-action="save"><i data-lucide="save" aria-hidden="true"></i>保存任务</button><button class="small-btn" type="button" data-patrol-action="start"><i data-lucide="play" aria-hidden="true"></i>开始巡逻</button></div></section>
+      </aside>
+    </main>
+  </div>
+  <script>
+    const root=document.getElementById('bee-console');
+    if(globalThis.lucide){lucide.createIcons({attrs:{width:15,height:15,strokeWidth:1.8}})}
+    const layerButtons=[...root.querySelectorAll('.layer-toggle')];
+    layerButtons.forEach(button=>button.addEventListener('click',()=>{
+      button.classList.toggle('active');
+      const visible=button.classList.contains('active');
+      root.querySelectorAll(`[data-layer-target="${button.dataset.layer}"]`).forEach(layer=>layer.classList.toggle('layer-hidden',!visible));
+      if(button.dataset.layer==='grid')root.querySelectorAll('.grid-cell.free,.grid-cell.unknown').forEach(cell=>cell.classList.toggle('layer-hidden',!visible));
+      if(button.dataset.layer==='obstacle')root.querySelectorAll('.grid-cell.occupied').forEach(cell=>cell.classList.toggle('layer-hidden',!visible));
+      if(button.dataset.layer==='global')root.querySelectorAll('.grid-cell.route').forEach(cell=>cell.classList.toggle('layer-hidden',!visible));
+      const count=layerButtons.filter(item=>item.classList.contains('active')).length;
+      root.querySelector('.layer-head span:last-child').textContent=`${count} / ${layerButtons.length} 可见`;
+    }));
+    const grid=root.querySelector('.occupancy-grid');
+    const NS='http://www.w3.org/2000/svg',cols=42,rows=23,cellW=22,cellH=22,gap=1.5,offset=10;
+    const freeGroup=document.createElementNS(NS,'g'),obstacleGroup=document.createElementNS(NS,'g'),routeGroup=document.createElementNS(NS,'g');
+    freeGroup.dataset.layerTarget='grid';obstacleGroup.dataset.layerTarget='obstacle';routeGroup.dataset.layerTarget='global';
+    function isOccupied(x,y){
+      if(x<2||x>39||y<2||y>20)return true;
+      if(x===12&&y>=3&&y<=13&&y!==8)return true;
+      if(y===5&&x>=23&&x<=36&&x!==30&&x!==31)return true;
+      if(x===31&&y>=6&&y<=15&&y!==10&&y!==11)return true;
+      if(y===17&&x>=5&&x<=20&&x!==12&&x!==13)return true;
+      if((x-34)**2+(y-14)**2<=1||(x-7)**2+(y-10)**2<=1)return true;
+      return false;
+    }
+    function isUnknown(x,y){return (x<4&&y<5)||(x>37&&y<3)||(x<3&&y>18)||(x>38&&y>18)}
+    function addCell(group,x,y,kind){const rect=document.createElementNS(NS,'rect');rect.setAttribute('x',offset+x*(cellW+gap));rect.setAttribute('y',offset+y*(cellH+gap));rect.setAttribute('width',cellW);rect.setAttribute('height',cellH);rect.setAttribute('rx','1.5');rect.setAttribute('class',`grid-cell ${kind}`);group.appendChild(rect)}
+    for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){
+      const kind=isOccupied(x,y)?'occupied':isUnknown(x,y)?'unknown':'free';
+      addCell(kind==='occupied'?obstacleGroup:freeGroup,x,y,kind);
+    }
+    grid.append(freeGroup,obstacleGroup,routeGroup);
+    const routeNodes=[[20,13],[21,14],[23,14],[24,12],[26,11],[28,10],[30,9],[32,8],[34,6]];
+    function rasterLine(a,b){let x=a[0],y=a[1],dx=Math.abs(b[0]-x),sx=x<b[0]?1:-1,dy=-Math.abs(b[1]-y),sy=y<b[1]?1:-1,err=dx+dy;while(true){addCell(routeGroup,x,y,'route');if(x===b[0]&&y===b[1])break;const e2=2*err;if(e2>=dy){err+=dy;x+=sx}if(e2<=dx){err+=dx;y+=sy}}}
+    for(let i=1;i<routeNodes.length;i++)rasterLine(routeNodes[i-1],routeNodes[i]);
+    const map=root.querySelector('.map'),goal=root.querySelector('.goal'),context=root.querySelector('.map-context'),feedback=root.querySelector('.map-feedback');
+    const layerPanel=root.querySelector('.layer-panel');
+    root.querySelector('.map-tools button:last-child').addEventListener('click',()=>layerPanel.classList.toggle('mobile-open'));
+    let selectedPoint={x:.82,y:.29};
+    function placePoint(event){const rect=map.getBoundingClientRect();selectedPoint={x:Math.max(.02,Math.min(.98,(event.clientX-rect.left)/rect.width)),y:Math.max(.04,Math.min(.96,(event.clientY-rect.top)/rect.height))};goal.style.left=`${selectedPoint.x*100}%`;goal.style.top=`${selectedPoint.y*100}%`;root.querySelector('.map-readout .map-chip:nth-child(2) b').textContent=`${(selectedPoint.x*20).toFixed(2)}, ${(selectedPoint.y*11).toFixed(2)}`}
+    map.addEventListener('click',event=>{if(event.target.closest('.layer-panel,.map-context,.map-head'))return;placePoint(event);context.classList.remove('open')});
+    map.addEventListener('contextmenu',event=>{event.preventDefault();placePoint(event);const rect=map.getBoundingClientRect(),menuW=168,menuH=92;context.style.left=`${Math.max(8,Math.min(rect.width-menuW-8,event.clientX-rect.left))}px`;context.style.top=`${Math.max(8,Math.min(rect.height-menuH-8,event.clientY-rect.top))}px`;context.querySelector('.context-coordinate').textContent=`${(selectedPoint.x*20).toFixed(2)}, ${(selectedPoint.y*11).toFixed(2)}`;context.classList.add('open')});
+    root.querySelectorAll('[data-map-action]').forEach(button=>button.addEventListener('click',()=>{const action=button.dataset.mapAction;feedback.textContent=action==='mark'?'已标定此地图点':'导航目标已选定 · 接入 ROS2 后确认下发';feedback.classList.add('show');context.classList.remove('open');setTimeout(()=>feedback.classList.remove('show'),2600)}));
+    document.addEventListener('click',event=>{if(!event.target.closest('.map-context'))context.classList.remove('open')});
+  </script>
+</div>
+<script src="/live.js?v=20260927-camera3"></script>

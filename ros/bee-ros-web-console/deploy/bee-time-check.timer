@@ -1,0 +1,11 @@
+[Unit]
+Description=Periodically verify Bee RDK trusted time sources
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+AccuracySec=10s
+Unit=bee-time-check.service
+
+[Install]
+WantedBy=timers.target

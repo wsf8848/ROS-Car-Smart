@@ -1,0 +1,23 @@
+[Unit]
+Description=Bee Nav2 task executor (production, safety locked by default)
+After=network.target
+
+[Service]
+Type=simple
+User=sunrise
+Group=sunrise
+Environment=ROS_DOMAIN_ID=0
+Environment=BEE_EXECUTOR_ALLOW_MOTION=0
+Environment=BEE_TASK_COMMAND_FILE=/run/bee-nav-task/command.json
+Environment=BEE_TASK_STATUS_FILE=/run/bee-nav-task/status.json
+Environment=BEE_PHYSICAL_VERIFICATION_FILE=/etc/bee-ros-web-console/physical-chassis-verified
+EnvironmentFile=-/etc/bee-nav-task.env
+RuntimeDirectory=bee-nav-task
+ExecStart=/opt/bee-ros-web-console/deploy/start-nav-task-executor.sh
+Restart=on-failure
+RestartSec=2
+KillMode=control-group
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target

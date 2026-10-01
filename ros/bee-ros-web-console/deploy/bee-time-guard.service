@@ -1,0 +1,13 @@
+[Unit]
+Description=Bee RDK Multi-Source Time Guard
+Wants=systemd-udev-settle.service
+After=local-fs.target systemd-udev-settle.service
+Before=bee-ld14.service bee-web-console.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/bee-ros-web-console/tools/bee_time_guard.py --repair
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b1116">
+  <title>登录 · Bee ROS Web Console</title>
+  <link rel="icon" href="/bee-ros-console.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/login.css?v=20260926-auth1">
+</head>
+<body>
+  <main class="login-shell">
+    <section class="system-scene" aria-label="Bee ROS车辆系统状态">
+      <div class="scene-grid" aria-hidden="true"></div>
+      <div class="route route-a" aria-hidden="true"></div>
+      <div class="route route-b" aria-hidden="true"></div>
+      <div class="radar" aria-hidden="true">
+        <span class="ring ring-a"></span><span class="ring ring-b"></span><span class="ring ring-c"></span>
+        <span class="radar-axis axis-x"></span><span class="radar-axis axis-y"></span>
+        <span class="sweep"></span><span class="vehicle"></span>
+        <i class="echo echo-a"></i><i class="echo echo-b"></i><i class="echo echo-c"></i><i class="echo echo-d"></i>
+      </div>
+      <div class="scene-brand">
+        <img src="/bee-ros-console.svg" alt="">
+        <div><strong>Bee ROS</strong><span>Autonomous Mobility Console</span></div>
+      </div>
+      <div class="scene-status"><span></span>RDK X5 本地控制链路</div>
+      <div class="scene-copy">
+        <p>四驱自主导航平台</p>
+        <h1>Bee ROS Web Console</h1>
+        <div class="scene-metrics"><span><b>ROS2</b>Humble</span><span><b>Nav2</b>路径规划</span><span><b>LD14</b>环境感知</span></div>
+      </div>
+    </section>
+
+    <section class="login-panel" aria-labelledby="login-title">
+      <div class="mobile-brand"><img src="/bee-ros-console.svg" alt=""><strong>Bee ROS</strong></div>
+      <div class="panel-kicker"><span></span>受控访问</div>
+      <h2 id="login-title">登录控制台</h2>
+      <p class="panel-copy">验证管理员身份后进入车辆监控与任务控制。</p>
+
+      <form id="login-form" novalidate>
+        <label for="username">管理员账号</label>
+        <div class="field"><input id="username" name="username" type="text" value="FYX" maxlength="64" autocomplete="username" autocapitalize="none" required></div>
+
+        <label for="password">管理员密码</label>
+        <div class="field password-field"><input id="password" name="password" type="password" maxlength="256" autocomplete="current-password" required><button id="toggle-password" type="button" aria-label="显示密码" aria-pressed="false">显示</button></div>
+
+        <label class="remember"><input id="remember" name="remember" type="checkbox"><span class="checkmark" aria-hidden="true"></span><span><b>下次自动登录</b><small>在此设备保持登录30天</small></span></label>
+
+        <div id="login-message" class="message" role="alert" aria-live="polite"></div>
+        <button id="login-submit" class="submit" type="submit"><span>进入控制台</span><i aria-hidden="true">→</i></button>
+      </form>
+
+      <div class="security-note"><span class="shield" aria-hidden="true">✓</span><span>本地车载网络 · 会话加密签名 · 操作全程审计</span></div>
+      <div class="connection"><span id="connection-dot"></span><span id="connection-text">正在检查网关...</span></div>
+    </section>
+  </main>
+  <script src="/login.js?v=20260926-auth1"></script>
+</body>
+</html>

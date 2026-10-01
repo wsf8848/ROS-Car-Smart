@@ -1,0 +1,2 @@
+# Bee网页只允许sunrise调用固定时间同步助手；助手自身再次校验时间范围和参数。
+sunrise ALL=(root) NOPASSWD: /usr/local/sbin/bee-time-sync --epoch-ms * --source browser
